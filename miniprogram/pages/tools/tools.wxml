@@ -1,0 +1,173 @@
+<!--miniprogram/pages/tools/tools.wxml-->
+<wxs src="../../wxs/utils.wxs" module="utils" />
+
+<view class="container pt-2 px-2 page">
+  <cu-custom bgColor="navbar" isCustom="{{true}}">
+    <view slot="content">棋谱生成</view>
+  </cu-custom>
+  <van-tabs animated line-width="0">
+    <van-tab title="当前阵容" style="height: 350rpx">
+      <view class="chessgroup d-flex flex-wrap">
+        <view wx:for="{{chessGroupArray}}" wx:key="index" class="chessgroup-item d-flex jc-center ai-center mt-2">
+          <view 
+            style="{{chessGroup[index].isSelected ? 'border:2rpx solid ' + chessGroup[index].qualityColor : ''}}"
+            class="chess-card d-flex flex-column jc-center ai-center"
+            bind:tap="removeChess"
+            data-name="{{chessGroup[index].name}}"
+            data-index="{{index}}"
+          >
+            <image wx:if="{{chessGroup[index].name}}" src="{{chessGroup[index].icon}}" data-type="image" data-url="https://636c-cloud-dev-0f318b-1257264379.tcb.qcloud.la/duoduo/hero_1001.png?sign=75fd770af3195d5c69aac6518d230ee7&t=1562265901" mode="widthFix" style="width: 120rpx;" class="chess-card-img"></image>
+            <text wx:else class="cuIcon-add" data-type="text" style="font-size: 32px;"></text>
+            <view wx:if="{{chessGroup[index].name}}" data-type="text" class="chess-card-text fs-xs text-center">{{chessGroup[index].name}}</view>
+          </view>
+        </view>
+      </view>
+    </van-tab>
+    <van-tab title="放置棋盘" style="height: 350rpx">
+      <view class="chessboard d-flex flex-wrap ai-start panel">
+        <view 
+          wx:for="{{chessBoardCellsArray}}" 
+          wx:key="chessBoardCells[index].name"
+          style="{{clickedIndex === index ? 'border: 2rpx dashed #5896d5;' : ''}}"
+          class="cell d-flex jc-center ai-center"
+          data-name="{{utils.getChessBoardCellProp(chessBoardCells, index, 'name')}}"
+          data-index="{{index}}"
+          bind:tap="clickMoveChess"
+        >
+          <image
+            class="draw_canvas"
+            wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}" 
+            src="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
+            data-type="image"
+            data-url="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
+            mode="widthFix" 
+            style="width: 50rpx;"
+          ></image>
+        </view>
+      </view>
+    </van-tab>
+  </van-tabs>
+  <view class="opertions d-flex jc-end ai-center mt-1 fs-sm">
+    <view class="buff flex-grow-1" bind:tap="showJibanDetail">
+      <text>羁绊效果: {{jibanText}}</text>
+    </view>
+    <view class="ml-2" bind:tap="deleteChessList">
+      <text class="cuIcon-delete"></text>
+      <text>清空</text>
+    </view>
+    <view class="mx-2" bind:tap="shareChessBoard">
+      <text class="cuIcon-share"></text>
+      <text>保存</text>
+    </view>
+  </view>
+  <view class="hero-filter mt-2">
+    <view class="race-container d-flex ai-center mt-1">
+      <text class="text text-blue1 fs-lg flex-none">种族:</text>
+      <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class="ml-1">
+        <view style="height: 52rpx;" class="d-flex ai-center">
+          <image
+            wx:for="{{raceList}}"
+            wx:key="index" 
+            src="{{ item.name === filterRace? item.ethnicPattern : item.ethnicIcon}}"
+            mode="widthFix"
+            style="width: 40rpx;"
+            class="ml-1"
+            data-race="{{item.name}}" 
+            bind:tap="filterHerosByRace">
+          </image>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="career-container d-flex ai-center mt-1">
+      <text class="text text-blue1 fs-lg flex-none">职业:</text>
+      <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class=" ml-1">
+        <view style="height: 52rpx;" class="d-flex ai-center">
+          <image 
+            wx:for="{{careerList}}" 
+            wx:key="index" 
+            src="{{item.name === filterCareer ? item.careerImg : item.careerIcon}}" 
+            mode="widthFix" 
+            style="width: 40rpx;"
+            class="ml-1"
+            data-career="{{item.name}}"
+            bind:tap="filterHerosByCareer">
+          </image>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="quality-container d-flex ai-center mt-1">
+      <text class="text text-blue1 fs-lg flex-none">品质:</text>
+      <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class="ml-1">
+        <view style="height: 52rpx;" class="d-flex ai-center">
+          <view 
+            wx:for="{{qualityList}}" 
+            wx:key="index" 
+            style="{{'background:'+item.color+';'}}"
+            class="quality-filter-btn {{item.name === filterQuality ? 'active' : ''}} ml-1"
+            data-quality="{{item.name}}"
+            bind:tap="filterHerosByQuality">
+         </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="hero-list mt-3">
+    <scroll-view scroll-y style="">
+      <view class="d-flex flex-wrap">
+        <view
+          wx:for="{{heroListDisplay}}" 
+          wx:key="item.name" style=""
+          class="hero-card d-flex flex-column ai-center"
+          data-name="{{item.name}}" bind:tap="addHero">
+           <view class="avatar-wrap" style="{{item.isSelected ? 'border:1px solid ' + item.qualityColor : ''}}">
+            <image src="{{item.icon}}" mode="widthFix" style="width: 112rpx;"></image>
+            <image src="{{item.miniIcon}}" mode="widthFix" style="width: 0;height: 0;visibility:hidden;" lazy-load="{{true}}"></image>
+            <text wx:if="{{item.isSelected}}" class="choosen cuIcon-roundcheckfill text-yellow"></text>
+           </view>
+           <text>{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<van-dialog
+  use-slot
+  show="{{ show }}"
+  overlay
+  close-on-click-overlay
+  show-confirm-button="{{false}}"
+  bind:close="onClose"
+>
+  <view class="buff-detail fs-xs py-2 pl-2">
+    <view class="buff-title fs-md text-primary">
+      <text style="font-weight: bold;">羁绊效果:</text>
+    </view>
+    <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:key="index" wx:for-item="buffs" >
+      <view class="buff-item-left">
+        <text class="text">{{buffs.list[buffs.list.length - 1][0] + buffs.name}}</text>
+      </view>
+      <view class="buff-item-content fs-sm"> 
+        <view wx:for="{{buffs.list}}" wx:key="{{index2}}" wx:for-item="buff" wx:for-index="index2" class="buff-item-content-wrap">
+          <text class="text">{{buff[1]}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</van-dialog>
+<view class="buff-detail fs-xs py-2 buff-detail-panel">
+  <view class="buff-title fs-md text-primary">
+    <view style="font-weight: bold;" class="draw_canvas" data-type="text" data-text="羁绊效果:">羁绊效果:</view>
+  </view>
+  <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:key="index" wx:for-item="buffs" >
+    <view class="buff-item-left">
+      <view class="text draw_canvas" data-type="text" data-text="{{buffs.list[buffs.list.length - 1][0] + buffs.name}}">{{buffs.list[buffs.list.length - 1][0] + buffs.name}}</view>
+    </view>
+    <view class="buff-item-content fs-sm"> 
+      <view wx:for="{{buffs.list}}" wx:key="{{index2}}" wx:for-item="buff" wx:for-index="index2" class="buff-item-content-wrap">
+        <view class="text draw_canvas" data-type="text" data-text="{{buff[1]}}">{{buff[1]}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<button wx:if="{{false}}" bind:tap="onClick">点击</button>
+<canvas canvas-id="canvas1" style="width: {{canvas1.width}}px;height: {{canvas1.height}}px;position: fixed; top: 20000px;"></canvas>

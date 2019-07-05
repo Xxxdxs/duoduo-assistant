@@ -1,0 +1,153 @@
+// 基础通用和工具样式
+$colors: (
+  "primary": #5797D5,
+  "white": #FFF,
+  "black": #000,
+  "light": #F9F9F9,
+  "grey1": #d4e2f4,
+  "grey2": #b5c2e7,
+  "blue1": #5878b1,
+  "dark": #222,
+  "human": #A29592,
+  "feathered": #194780,
+  "demon": #B22CC0,
+  "goblin": #CF4E23,
+  "beast": #30A671,
+  "cave": #CF202E,
+  "marine": #664EC1,
+  "egersis": #748A90,
+  "glacier": #A3A471,
+  "dragon": #CB1D7D,
+  "kira": #1E8DA5,
+  "spirits": #19232E,
+  "dwarf": #BD6A48
+);
+
+$font-sizes: (
+  xs: 10px,
+  sm: 12px,
+  md: 14px,
+  lg: 16px,
+  xl: 18px
+);
+
+$flex-jc: (
+  "start": flex-start,
+  "end": flex-end,
+  "center": center,
+  "around": space-around,
+  "between": space-between,
+  "evenly": space-evenly
+);
+
+$flex-ai: (
+  "start": flex-start,
+  "end": flex-end,
+  "center": center,
+  "stretch": stretch,
+  "baseline": baseline
+);
+
+$spacing-types: (
+  m: margin,
+  p: padding
+);
+
+$spacing-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left
+);
+
+$spacing-sizes: (
+  0: 0,
+  1: 6rpx,
+  2: 12rpx,
+  3: 24rpx,
+  4: 36rpx,
+  5: 72rpx
+);
+
+// #{$k} 占位符 类似于 js中`${}`
+
+@each $k, $v in $colors {
+  .text-#{$k} {
+    color: $v;
+  }
+
+  .bg-#{$k} {
+    background-color: $v;
+  }
+}
+
+@each $v in (left, center, right) {
+  .text-#{$v} {
+    text-align: $v;
+  }
+}
+
+@each $k, $v in $font-sizes {
+  .fs-#{$k} {
+    font-size: $v;
+  }
+}
+
+@each $k, $v in $flex-jc {
+  .jc-#{$k} {
+    justify-content: $v;
+  }
+}
+
+@each $k, $v in $flex-ai {
+  .ai-#{$k} {
+    align-items: $v;
+  }
+}
+
+@each $typeK, $typeV in $spacing-types {
+  // m-1
+  @each $sizeK, $sizeV in $spacing-sizes {
+    .#{$typeK}-#{$sizeK} {
+      #{$typeV}: $sizeV;
+    }
+  }
+  // mx-1 my-1
+  @each $sizeK, $sizeV in $spacing-sizes {
+    .#{$typeK}x-#{$sizeK} {
+      #{$typeV}-left: $sizeV;
+      #{$typeV}-right: $sizeV;
+    }
+  }
+
+  @each $sizeK, $sizeV in $spacing-sizes {
+    .#{$typeK}y-#{$sizeK} {
+      #{$typeV}-top: $sizeV;
+      #{$typeV}-bottom: $sizeV;
+    }
+  }
+  // mt-1
+  @each $directionK, $directionV in $spacing-directions {
+    @each $sizeK, $sizeV in $spacing-sizes {
+      .#{$typeK}#{$directionK}-#{$sizeK} {
+        #{$typeV}-#{$directionV}: $sizeV;
+      }
+    }
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-wrap {
+  flex-wrap: wrap
+}

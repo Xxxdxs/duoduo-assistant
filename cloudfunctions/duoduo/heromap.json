@@ -1,0 +1,275 @@
+[{
+    "_id": "5d0e044f5e2d422350de65bb",
+    "name": "赤斧酋长",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1001.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65bd",
+    "name": "海象王",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1004.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65bf",
+    "name": "独角兽",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1002.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65c1",
+    "name": "冰霜骑士",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1009.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65c3",
+    "name": "背叛者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1008.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65c5",
+    "name": "不眠游侠",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1005.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65c7",
+    "name": "刺魂者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1006.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65c9",
+    "name": "霸天者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1007.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65cb",
+    "name": "轰天者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1010.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65cd",
+    "name": "禁忌猎魔人",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1011.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65cf",
+    "name": "食人魔法师",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1003.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65d1",
+    "name": "岩之灵",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1012.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65d3",
+    "name": "剑客",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1015.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65d5",
+    "name": "独眼猎手",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1014.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65d7",
+    "name": "绝命巫医",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1019.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65d9",
+    "name": "海渊守卫",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1020.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65db",
+    "name": "魔力之源",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1013.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65dd",
+    "name": "光鳞龙",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1018.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65df",
+    "name": "撕裂者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1016.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65e1",
+    "name": "炼狱骑士",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1021.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65e3",
+    "name": "水之灵",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1025.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65e5",
+    "name": "盘羊骑士",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1028.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65e7",
+    "name": "慧语先知",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1024.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65e9",
+    "name": "灵刃骑士",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1023.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65eb",
+    "name": "扭木贤者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1022.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65ed",
+    "name": "魅影女王",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1017.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65ef",
+    "name": "暗影魔王",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1037.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65f1",
+    "name": "堕落猎魔人",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1039.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65f3",
+    "name": "雷之灵",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1029.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65f5",
+    "name": "沙地之主",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1033.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65f7",
+    "name": "邪灵骑士",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1032.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65f9",
+    "name": "魔化毒虫",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1027.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65fb",
+    "name": "焰灵法师",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1038.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65fd",
+    "name": "狼人",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1026.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de65ff",
+    "name": "海渊夜行者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1034.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6601",
+    "name": "幽影夜行者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1031.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6603",
+    "name": "逐风游侠",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1030.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6605",
+    "name": "毒液",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1036.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6607",
+    "name": "矮人火枪手",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1035.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6609",
+    "name": "利爪",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1050.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de660b",
+    "name": "灵魂收割者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1044.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de660d",
+    "name": "龟甲长老",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1043.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de660f",
+    "name": "海盗船长",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1041.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6611",
+    "name": "龙骑士",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1049.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6613",
+    "name": "光羽刺客",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1045.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6615",
+    "name": "末日审判官",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1040.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6617",
+    "name": "海妖",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1048.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6619",
+    "name": "狂战士",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1042.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de661b",
+    "name": "萃毒者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1046.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de661d",
+    "name": "风暴萨满",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1047.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de661f",
+    "name": "毁灭者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1055.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6621",
+    "name": "海啸追猎者",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1053.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6623",
+    "name": "暗之灵",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1054.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6625",
+    "name": "凋零法师",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1052.png"
+  },
+  {
+    "_id": "5d0e044f5e2d422350de6627",
+    "name": "矮人直升机",
+    "miniIcon": "cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1051.png"
+  }]

@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/tools/tools",
+    "pages/index/index",
+    "pages/strategy/strategy",
+    "pages/user/user"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "多多岛小助手",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "usingComponents": {
+    "cu-custom":"/colorui/components/cu-custom",
+    "van-tab": "/lib/tab/index",
+    "van-tabs": "/lib/tabs/index",
+    "van-dialog": "/lib/dialog/index"
+  }
+}

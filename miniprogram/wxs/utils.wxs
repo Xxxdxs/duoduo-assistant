@@ -1,0 +1,38 @@
+function hasChessListContainsIndex(list, index) {
+  var ret = false
+  list.forEach(function(el) {
+    if (el.sortIndex === index) {
+      ret = true
+      return ret
+    }
+  })
+  return ret
+}
+
+function getChessBoardCellImgSrc(list, index) {
+  var src = ''
+  list.forEach(function(el) {
+    if (el.sortIndex === index) {
+      src = el.miniIcon
+      return src
+    }
+  })
+  return src
+}
+
+function getChessBoardCellProp(list, index, prop) {
+  var ret = ''
+  list.forEach(function(el) {
+    if (el.sortIndex === index) {
+      ret = el[prop]
+      return ret
+    }
+  })
+  return ret
+}
+
+module.exports = {
+  hasChessListContainsIndex: hasChessListContainsIndex,
+  getChessBoardCellImgSrc: getChessBoardCellImgSrc,
+  getChessBoardCellProp: getChessBoardCellProp
+}

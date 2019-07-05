@@ -1,0 +1,145 @@
+/* miniprogram/pages/tools/tools.wxss */
+page {
+  /* background: url(//static.dragonest.com/longyuan-nuxt-website-zzq/production/nuxt/img/bj.9b800de.png); */
+  background: #161f2b;
+}
+
+.navbar {
+  /* background: rgb(250, 250, 250); */
+  background: #141D28;
+  color: #5896d5;
+}
+
+/* height=width纯css怎么做? */
+.cell {
+  width: 12.5%;
+  height: 80rpx;
+  background: #223144;
+}
+
+.chessboard {
+  margin: 12rpx 43rpx 0;
+}
+
+/* 范围选择器, cool, 分行, no cool */
+.chessboard .cell:nth-child(-2n+7) {
+  background:#3B5375;
+}
+
+.chessboard .cell:nth-child(n+9):nth-child(-2n+16) {
+  background:#3B5375;
+}
+
+.chessboard .cell:nth-child(n+17):nth-child(-2n+23) {
+  background:#3B5375;
+}
+
+.chessboard .cell:nth-child(n+25):nth-child(-2n+32) {
+  background:#3B5375;
+}
+
+.race-container,.career-container,.quality-container {
+  height: 52rpx;
+}
+
+.race-container,.career-container,.quality-container .text {
+  line-height: 52rpx;
+  vertical-align: middle;
+}
+
+.avatar-wrap{
+  position: relative;
+  width: 112rpx;
+  height: 112rpx;
+}
+
+.choosen {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.chessgroup-item {
+  width: 20%;
+  height: 160rpx;
+}
+
+.chess-card {
+  position: relative;
+  width: 124rpx;
+  height: 148rpx;
+  border: 2rpx dashed #3B5375;
+  border-radius: 8rpx;
+}
+
+.chess-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.chess-card-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background: #5896d5;
+}
+
+.chessboard, .chessgroup {
+  align-content: flex-start;
+}
+
+.hero-card {
+  width: 20%;
+}
+
+.quality-filter-btn {
+  display: inline-block;
+  width: 40rpx; 
+  height: 40rpx;
+  border-radius: 50%;
+}
+
+.quality-filter-btn.active {
+  width: 50rpx; 
+  height: 50rpx;
+}
+
+.opertions {
+  color: #5896d5;
+}
+
+.buff {
+  width: 540rpx;
+}
+
+.buff-detail {
+  background: #161f2b;
+  color: #5797D5;
+}
+
+.buff-detail-panel {
+  position: absolute;
+  left: 800rpx;
+  top: 0rpx;
+  width: 640rpx;
+  background: #161f2b;
+  color: #5797D5;
+}
+
+.buff-item-left {
+  width: 80rpx;
+  flex: none;
+}
+
+.buff-item-left .text {
+
+}
+
+.buff-item-content-wrap .text {
+
+}
