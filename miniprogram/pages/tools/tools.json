@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "star-level": "../../components/star-level/star-level"
+  },
   "navigationBarTitleText": "阵容模拟器"
 }

@@ -194,7 +194,6 @@ class Wxml2Canvas {
 
         list.forEach((item, i) => {
             if (item.url && self._findPicIndex(item.url) === -1) {
-                
                 // 避免重复下载同一图片
                 self.allPic.push({
                     url: item.url,
@@ -323,6 +322,7 @@ class Wxml2Canvas {
             
             let url;
             if(isImage) {
+              // BUG 此处前面的local还为''时, 就已经进行了计算
                 let index = this._findPicIndex(item.url);
                 if(index > -1) {
                     url = this.allPic[index].local
@@ -380,7 +380,7 @@ class Wxml2Canvas {
                 this.ctx.fillRect(x, y, width, height);
             }
         });
-        
+
         if(url) {
             // 开发者工具有bug，先不裁剪
             if(mode) {

@@ -1,10 +1,9 @@
 <!--miniprogram/pages/tools/tools.wxml-->
 <wxs src="../../wxs/utils.wxs" module="utils" />
-
+<cu-custom bgColor="navbar" isCustom="{{true}}">
+  <view slot="content">棋谱生成</view>
+</cu-custom>
 <view class="container pt-2 px-2 page">
-  <cu-custom bgColor="navbar" isCustom="{{true}}">
-    <view slot="content">棋谱生成</view>
-  </cu-custom>
   <van-tabs animated line-width="0">
     <van-tab title="当前阵容" style="height: 350rpx">
       <view class="chessgroup d-flex flex-wrap">
@@ -29,20 +28,25 @@
           wx:for="{{chessBoardCellsArray}}" 
           wx:key="chessBoardCells[index].name"
           style="{{clickedIndex === index ? 'border: 2rpx dashed #5896d5;' : ''}}"
-          class="cell d-flex jc-center ai-center"
+          class="cell d-flex jc-center flex-column ai-center"
           data-name="{{utils.getChessBoardCellProp(chessBoardCells, index, 'name')}}"
           data-index="{{index}}"
           bind:tap="clickMoveChess"
         >
           <image
-            class="draw_canvas"
+            class="draw_canvas chess"
             wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}" 
             src="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
             data-type="image"
             data-url="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
-            mode="widthFix" 
-            style="width: 50rpx;"
+            data-delay="100"
           ></image>
+          <!-- <star-level wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}" level="{{3}}"></star-level> -->
+          <view class="star-wrap" wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}">
+            <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
+            <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
+            <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>  
+          </view>
         </view>
       </view>
     </van-tab>
@@ -112,7 +116,7 @@
     </view>
   </view>
   <view class="hero-list mt-3">
-    <scroll-view scroll-y style="">
+    <scroll-view wx:if="{{!!heroList.length}}" scroll-y style="">
       <view class="d-flex flex-wrap">
         <view
           wx:for="{{heroListDisplay}}" 
@@ -143,31 +147,44 @@
       <text style="font-weight: bold;">羁绊效果:</text>
     </view>
     <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:key="index" wx:for-item="buffs" >
-      <view class="buff-item-left">
+      <view class="buff-item-left d-flex ai-center">
         <text class="text">{{buffs.list[buffs.list.length - 1][0] + buffs.name}}</text>
       </view>
       <view class="buff-item-content fs-sm"> 
         <view wx:for="{{buffs.list}}" wx:key="{{index2}}" wx:for-item="buff" wx:for-index="index2" class="buff-item-content-wrap">
           <text class="text">{{buff[1]}}</text>
         </view>
+        <view class="buff-item-heros d-flex ai-center flex-wrap">
+          <view wx:for="{{buffs.heroList}}" wx:for-item="hero" wx:for-index="index3" wx:key="{{index3}}" class="buff-item-hero d-flex ai-center">
+            <image class="buff-item-hero-avatar" src="{{hero.miniIcon}}" mode="widthFix" style="width: 40rpx;"></image>
+            <text class="buff-item-hero-name">{{hero.name}}</text>
+          </view>
+        </view>
       </view>
     </view>
   </view>
 </van-dialog>
+<!-- 因为这van-dialog在点击详情前无法计算style: -->
 <view class="buff-detail fs-xs py-2 buff-detail-panel">
   <view class="buff-title fs-md text-primary">
     <view style="font-weight: bold;" class="draw_canvas" data-type="text" data-text="羁绊效果:">羁绊效果:</view>
   </view>
-  <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:key="index" wx:for-item="buffs" >
-    <view class="buff-item-left">
+  <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:key="{{index}}" wx:for-item="buffs" >
+    <view class="buff-item-left d-flex ai-center">
       <view class="text draw_canvas" data-type="text" data-text="{{buffs.list[buffs.list.length - 1][0] + buffs.name}}">{{buffs.list[buffs.list.length - 1][0] + buffs.name}}</view>
     </view>
     <view class="buff-item-content fs-sm"> 
       <view wx:for="{{buffs.list}}" wx:key="{{index2}}" wx:for-item="buff" wx:for-index="index2" class="buff-item-content-wrap">
         <view class="text draw_canvas" data-type="text" data-text="{{buff[1]}}">{{buff[1]}}</view>
       </view>
+      <view class="buff-item-heros d-flex ai-center flex-wrap">
+        <view wx:for="{{buffs.heroList}}" wx:for-item="hero" wx:for-index="index3" wx:key="{{index3}}" class="buff-item-hero d-flex ai-center">
+          <image class="buff-item-hero-avatar draw_canvas" src="{{hero.miniIcon}}" data-type="image" data-url="{{hero.miniIcon}}" data-mode="widthFix" data-delay="100" mode="widthFix" style="width: 40rpx;"></image>
+          <text class="buff-item-hero-name draw_canvas" data-type="text" data-text="{{hero.name}}">{{hero.name}}</text>
+        </view>
+      </view>
     </view>
   </view>
 </view>
-<button wx:if="{{false}}" bind:tap="onClick">点击</button>
-<canvas canvas-id="canvas1" style="width: {{canvas1.width}}px;height: {{canvas1.height}}px;position: fixed; top: 20000px;"></canvas>
+<button wx:if="{{false}}" bind:tap="onClick">调试</button>
+<canvas canvas-id="canvas1" style="width: {{canvas1.width}}px;height: {{canvas1.height}}px;position: fixed; top: -20000px;left: 0px;right: 0px;"></canvas>

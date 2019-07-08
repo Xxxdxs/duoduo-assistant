@@ -1,1 +1,50 @@
 /* miniprogram/pages/user/user.wxss */
+.navbar {
+  /* background: rgb(250, 250, 250); */
+  background: #141D28;
+  color: #5896d5;
+}
+
+.userinfo {
+  margin-top: 40rpx;
+  height: 140rpx;
+  width: 100%;
+  background: #1D2B39;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: none;
+  border-right: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: #1D2B39;
+}
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.userinfo-nickname {
+  font-size: 32rpx;
+  background-size: cover;
+}
+
+.userinfo-nickname::after {
+  border: none;
+}
+
+.placeholder {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+}

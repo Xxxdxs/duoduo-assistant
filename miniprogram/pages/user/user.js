@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    avatarUrl: '../../common/img/user-unlogin.png',
+    logged: false,
+    userInfo: {}
   },
 
   /**
@@ -62,5 +64,15 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  onGetUserInfo: function(e) {
+    if (!this.logged && e.detail.userInfo) {
+      this.setData({
+        logged: true,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        userInfo: e.detail.userInfo
+      })
+    }
+  },
 })

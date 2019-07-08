@@ -10,11 +10,12 @@ const cellWidth = 40
 const cellHeight = 40
 const initPaddingX = 27.5
 const initPaddingY = 25
-const cellColor1 = '#f7f8f9'
-const cellColor2 = '#e9ebed'
+// const cellColor1 = '#f7f8f9'
+// const cellColor2 = '#e9ebed'
 
-// const cellColor1 = '#3B5375'
-// const cellColor2 = '#223144'
+const cellColor1 = '#3B5375'
+const cellColor2 = '#223144'
+
 let chessBoardCanvasList = []
 
 // 棋盘单元格有两种, 每行的顺序不一样

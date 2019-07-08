@@ -12,6 +12,7 @@
 
 page {
   color: #d2d2d2;
+  background: #161f2b;
   font-size: 14px;
 }
 

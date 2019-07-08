@@ -1,2 +1,15 @@
 <!--components/star-level/star-level.wxml-->
-<text>components/star-level/star-level.wxml</text>
+
+<view class="star-wrap" wx:if="{{level === 1}}">
+  <image class="star draw_canvas" src="../common/img/star_one.png"></image>
+</view>
+<view class="star-wrap" wx:if="{{level === 2}}">
+  <image class="star draw_canvas" src="../../common/img/star_two.png"></image>
+  <image class="star draw_canvas" src="../../common/img/star_two.png"></image>
+</view>
+<view class="star-wrap" wx:if="{{level === 3}}">
+  <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
+  <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
+  <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>  
+</view>
+

@@ -1,2 +1,22 @@
 <!--miniprogram/pages/user/user.wxml-->
-<text>miniprogram/pages/user/user.wxml</text>
+<cu-custom bgColor="navbar" isCustom="{{true}}">
+  <view slot="content">个人中心</view>
+</cu-custom>
+<view class="container">
+
+  <!-- 用户 openid -->
+  
+  <view class="userinfo">
+    <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button>
+    <view>
+      <text class="userinfo-nickname">{{logged ? '欢迎你 ' + userInfo.nickName: '点击头像登录'}}</text>
+    </view>
+  </view>
+
+  <view class="placeholder">开发者很懒, 暂时什么也没有...</view>
+</view>

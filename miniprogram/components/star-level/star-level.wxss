@@ -1,1 +1,11 @@
 /* components/star-level/star-level.wxss */
+.star-wrap {
+  width: 80rpx;
+  font-size: 0;
+  text-align: center;
+}
+
+.star {
+  width: 16rpx;
+  height: 16rpx;
+}

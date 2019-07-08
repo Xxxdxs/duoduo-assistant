@@ -12,6 +12,7 @@ page {
 
 /* height=width纯css怎么做? */
 .cell {
+  position: relative;
   width: 12.5%;
   height: 80rpx;
   background: #223144;
@@ -142,4 +143,37 @@ page {
 
 .buff-item-content-wrap .text {
 
+}
+
+.buff-item-heros {
+
+}
+
+.buff-item-hero {
+  margin-left: 4rpx;
+}
+
+.star-wrap {
+  position: absolute;
+  bottom: 4rpx;
+  left: 0;
+  right: 0;
+  width: 80rpx;
+  font-size: 0;
+  text-align: center;
+}
+
+.star {
+  width: 16rpx;
+  height: 16rpx;
+}
+
+.cell .chess {
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  top: 5rpx;
+  left: 15rpx;
+  right: 15rpx;
+  bottom: 25rpx;
 }

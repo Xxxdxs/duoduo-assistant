@@ -8,7 +8,7 @@ const zoom = wx.getSystemInfoSync().windowWidth / 375
 Page({
 
   /**
-   * 23_g-WEgAvU-ye1lPjNXckHkXpYek9pxed-dYR5lA7GDIZceWsvvdgA7KQN3k0K61RNKM5Kuut_I_IHNPZtjcvpNg--gkKbzfYmle40Mb03kB31IHasWeuv4Z2WkjW1vVm-fqxErNVmYPgGy8DfVFVaAEABLB
+   * 
    * 页面的初始数据
    */
   // 如果data中的一个属性值为对象数组,
@@ -382,20 +382,23 @@ Page({
     let jibanText = ''
     let jibanList = []
     raceList.forEach(race => {
-      const sameRaceCount = chessGroup.filter(el => el.category.includes(race.name)).length
-      raceJibanObj[race.name] = sameRaceCount
+      const sameRaceChess = chessGroup.filter(el => el.category.includes(race.name))
+      const sameRaceCount = sameRaceChess.length
+
+      raceJibanObj[race.name] = {sameRaceCount, heroList: sameRaceChess}
     })
     careerList.forEach(career => {
-      const sameRaceCount = chessGroup.filter(el => el.cardType.includes(career.name)).length
-      careerJibanObj[career.name] = sameRaceCount
+      const sameCareerChess = chessGroup.filter(el => el.cardType.includes(career.name))
+      const sameCareerCount = sameCareerChess.length
+      careerJibanObj[career.name] = {sameCareerCount, heroList: sameCareerChess}
     })
 
     for(const k in raceJibanObj) {
       const raceSkills = raceList.find(el => el.name === k).skills
-      if (raceJibanObj[k]) {
-        const _raceSkills = raceSkills.filter((el, i) => el[0] <= raceJibanObj[k])
+      if (raceJibanObj[k].sameRaceCount > 0) {
+        const _raceSkills = raceSkills.filter((el, i) => el[0] <= raceJibanObj[k].sameRaceCount)
         if (_raceSkills.length) {
-          jibanList.push({name: k, list: _raceSkills})
+          jibanList.push({name: k, list: _raceSkills, heroList: raceJibanObj[k].heroList})
           const raceJibanText = _raceSkills[_raceSkills.length - 1][0] + k
           jibanText += raceJibanText + ' '
         }
@@ -404,10 +407,10 @@ Page({
 
     for(const k in careerJibanObj) {
       const careerSkills = careerList.find(el => el.name === k).skills
-      if (careerJibanObj[k]) {
-        const _careerSkills = careerSkills.filter((el, i) => el[0] <= careerJibanObj[k])
+      if (careerJibanObj[k].sameCareerCount) {
+        const _careerSkills = careerSkills.filter((el, i) => el[0] <= careerJibanObj[k].sameCareerCount)
         if (_careerSkills.length) {
-          jibanList.push({name: k, list: _careerSkills})
+          jibanList.push({name: k, list: _careerSkills, heroList: careerJibanObj[k].heroList})
           const careerJibanText = _careerSkills[_careerSkills.length - 1][0] + k
           jibanText += careerJibanText + ' '
         }
@@ -452,13 +455,10 @@ Page({
     await sleep(500)
     const drawImage = new Wxml2Canvas({
         width: 375, // 宽， 以iphone6为基准，传具体数值，其他机型自动适配
-        height: 80 + 190 + this.data.buffTextHeight + 10 , // 高
+        height: (80 + 190 + this.data.buffTextHeight + 10) , // 图片的高 为各部分计算而来(插件BUG, 手动*zoom)
         element: 'canvas1', 
-        background: '#ffffff',
+        background: '#161f2b',
         progress (percent) {
-          wx.showLoading({
-            title: '正在生成图片',
-          })
           if (percent === 100) {
             wx.hideLoading()
           }
@@ -475,77 +475,85 @@ Page({
           //   current: current, // 当前显示图片的http链接  
           //   urls: this.data.imglist // 需要预览的图片http链接列表  
           // })
-          setTimeout(() => {
-            wx.saveImageToPhotosAlbum({
-              filePath: url,
-              success(result) {
-                wx.showToast({
-                  title: '图片保存成功',
-                  icon: 'success',
-                  duration: 2000
-                })
-              }
-            })
-          }, 1000)
+          wx.saveImageToPhotosAlbum({
+            filePath: url,
+            success(result) {
+              wx.showToast({
+                title: '图片保存成功',
+                icon: 'success',
+                duration: 2000
+              })
+            }
+          })
+
         },
         error (res) {
           console.log(res)
         }
     })
+    // 绘图存在很多BUG
+    // 待解决 重复图片第二次不绘制
+    // 虽然将buff效果和棋盘棋子渲染顺序倒过来暂时解决
     let data = {
         list: [
           ...createChessBoard(), {
+            // buff效果
+            type: 'wxml',
+            class: '.buff-detail-panel .draw_canvas',
+            limit: '.buff-detail-panel',
+            x: 27.5,
+            y: 190
+          }, {
+          // 棋盘棋子
           type: 'wxml',
           class: '.panel .draw_canvas',
           limit: '.panel',
           x: 27.5,
           y: 25
         }, {
-          // buff效果
-          type: 'wxml',
-          class: '.buff-detail-panel .draw_canvas',
-          limit: '.buff-detail-panel',
-          x: 27.5,
-          y: 190
-        }, {
-          // 二维码效果
+          // 二维码
           type: 'image',
             url: '/common/qrcode/qrcode.jpeg',
             // delay: true,
             x: 27.5,
             // 要动态计算的...
-            y: 190 + this.data.buffTextHeight,
+            y: (190 + this.data.buffTextHeight),
             style: {
-            	width: 80,
+              width: 80,
               height: 80
           }
         }, {
           // 介绍文本
           type: 'text',
-          text: '一直下棋, 一直爽!---多多岛小助手',
-          x: 135,
-          y: 190 + this.data.buffTextHeight + 20,
+          text: '一直下棋, 一直爽! by多多岛小助手',
+          x: 125,
+          y: (190 + this.data.buffTextHeight + 20),
           style: {
             fontSize: 10,
               lineHeight: 20,
               color: '#5896d5',
+              width: 220
           }
         }, {
           // 介绍文本
           type: 'text',
           text: '长按识别二维码进入小程序',
-          x: 135,
-          y: 190 + this.data.buffTextHeight + 40,
+          x: 125,
+          y: (190 + this.data.buffTextHeight + 40),
           style: {
             fontSize: 10,
               lineHeight: 20,
               color: '#5896d5',
+              width: 220
           }
         }
       ]
     }
 
     drawImage.draw(data);
+    wx.showLoading({
+      title: '正在生成图片',
+    })
   },
 
   CalcBuffTextHeight() {
@@ -554,7 +562,7 @@ Page({
       size: true
     }, function(res) {
       self.setData({
-        buffTextHeight: res.height
+        buffTextHeight: res.height / zoom
       })
     }).exec()
   },
@@ -576,24 +584,30 @@ Page({
     //     })
       
     // }})
-    // wx.request({
-    //   url: 'https://api.weixin.qq.com/wxa/getwxacode?access_token=23_g-WEgAvU-ye1lPjNXckHkXpYek9pxed-dYR5lA7GDIZceWsvvdgA7KQN3k0K61RNKM5Kuut_I_IHNPZtjcvpNg--gkKbzfYmle40Mb03kB31IHasWeuv4Z2WkjW1vVm-fqxErNVmYPgGy8DfVFVaAEABLB', //仅为示例，并非真实的接口地址
-    //   method: 'POST',
-    //   data: {
-    //     "path":"page/tools/tools",
-    //     "width": 280
-    //   },
-    //   success (res) {
-    //     wx.saveImageToPhotosAlbum({
-    //       filePath: res.data,
-    //       success(result) {
-    //         wx.showToast({
-    //           title: '成功'
-    //         })
-    //       }
-    //     })
-    //   }
-    // })
+      // wx.request({
+      //   url: 'https://api.weixin.qq.com/cgi-bin/token',
+      //   method: 'GET',
+      //   data: {
+      //     grant_type: 'client_credential',
+      //     appid: 'wxd9050e85b9c776ca',
+      //     secret: ''
+      //   },
+      //   success(res1) {
+      //     console.log(res1)
+      //     wx.request({
+      //       url: `https://api.weixin.qq.com/wxa/getwxacode?access_token=${res1.data.access_token}`, //仅为示例，并非真实的接口地址
+      //       method: 'POST',
+      //       data: {
+      //         "path": "pages/tools/tools",
+      //         "width": 280
+      //       },
+      //       success(res2) {
+      //         console.log(res2)
+      //       }
+      //     })
+      //   }
+      // })
+
     // this.CalcBuffTextHeight()
   }
 })

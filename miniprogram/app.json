@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/tools/tools",
+    "pages/user/user",
     "pages/index/index",
-    "pages/strategy/strategy",
-    "pages/user/user"
+    "pages/strategy/strategy"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -22,6 +22,26 @@
     "cu-custom":"/colorui/components/cu-custom",
     "van-tab": "/lib/tab/index",
     "van-tabs": "/lib/tabs/index",
-    "van-dialog": "/lib/dialog/index"
+    "van-dialog": "/lib/dialog/index",
+    "van-loading": "/lib/loading/index"
+  },
+  "tabBar": {
+    "color": "#7d7e80",
+    "selectedColor": "#5797D5",
+    "backgroundColor": "#1c2a38",
+    "list": [
+      {
+        "pagePath": "pages/tools/tools",
+        "iconPath": "common/img/tools.png",
+        "selectedIconPath": "common/img/tools-active.png",
+        "text": "工具"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "common/img/user.png",
+        "selectedIconPath": "common/img/user-active.png",
+        "text": "我的"
+      }
+    ]
   }
 }
