@@ -199,10 +199,13 @@ class Wxml2Canvas {
                     url: item.url,
                     local: ''
                 });
+                console.log('request start before')
                 all[count++] = new Promise((resolve, reject) => {
+                    console.log('request start')
                     // 非http(s)域名的就不下载了
                     // 因为不能下载云文件, 所以要修改一下
                     if (!/^cloud/.test(item.url) && !/^http/.test(item.url) || /^http:\/\/(tmp)|(usr)\//.test(item.url) || /^http:\/\/127\.0\.0\.1/.test(item.url)) {
+                        console.log('read local img')
                         if(item.isBase64) {
                             let fileManager = wx.getFileSystemManager();
 
@@ -223,9 +226,11 @@ class Wxml2Canvas {
                         }
 
                         function imageInfo (url) {
+                          console.log('rgetImageInfo' + url)
                             wx.getImageInfo({
                                 src: url,
                                 success (res) {
+                                  console.log('rgetImageInfo' + res.width)
                                     let index = self._findPicIndex(url);
                                     if(index > -1) {
                                         self.allPic[index].local = url;
@@ -235,12 +240,14 @@ class Wxml2Canvas {
                                     resolve({ tempFilePath: url });
                                 }, 
                                 fail (res) {
+                                    console.log(res)
                                     reject(res);
                                 }
                             })
                         }
                     } else {
                         if (/^http/.test(item.url)) {
+                          console.log('read http img')
                             wx.downloadFile({
                               url: item.url.replace(/^https?/, 'https'),
                               success: function (res) {
@@ -265,12 +272,14 @@ class Wxml2Canvas {
                               }
                           })
                         } else if (/^cloud/.test(item.url)) {
+                          console.log('cloud request send')
                           wx.cloud.downloadFile({
                             fileID: item.url,
                             success: function (res) {
                                 wx.getImageInfo({
                                     src: res.tempFilePath,
                                     success (img) {
+                                        console.log('cloud request receive')
                                         let index = self._findPicIndex(item.url);
                                         if (index > -1) {
                                             self.allPic[index].local = res.tempFilePath;
@@ -295,6 +304,7 @@ class Wxml2Canvas {
         });
 
         return Promise.all(all).then(results => {
+            console.log('promised end')
             return new Promise(resolve => { resolve() })
         }).catch((results) => {
             return new Promise((resolve, reject) => { reject(results) })

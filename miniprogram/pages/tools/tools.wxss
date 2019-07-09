@@ -125,8 +125,7 @@ page {
 
 .buff-detail-panel {
   position: absolute;
-  left: 800rpx;
-  top: 0rpx;
+  top: -20000rpx;
   width: 640rpx;
   background: #161f2b;
   color: #5797D5;

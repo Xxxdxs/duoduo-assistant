@@ -1,6 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 const heromap = require('./heromap.json')
+const axios = require('axios')
 
 cloud.init()
 const db = cloud.database()
@@ -40,6 +41,12 @@ exports.main = async (event, context) => {
     if (event.name === 'getHeroById') {
       const data = await db.collection('heroes').doc(event._id).get()
       return data
+    }
+
+    if (event.name === 'test') {
+      const url = 'https://miniapp.you.163.com/xhr/index/index.json'
+      const res = await axios.get('https://miniapp.you.163.com/xhr/index/index.json')
+      return res.data.data
     }
   } catch(e) {
     console.log(e)

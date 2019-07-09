@@ -459,6 +459,7 @@ Page({
         element: 'canvas1', 
         background: '#161f2b',
         progress (percent) {
+          console.log(percent)
           if (percent === 100) {
             wx.hideLoading()
           }
