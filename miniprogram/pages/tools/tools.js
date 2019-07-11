@@ -50,8 +50,10 @@ Page({
       heroListDisplay() {
         const {filterRace, filterCareer, filterQuality} = this.data
         return this.data.heroList.filter(el => {
-          const raceCondition = !filterRace || Boolean(~el.category.findIndex(el => el === filterRace))
-          const careerCondition = !filterCareer || Boolean(~el.cardType.findIndex(el => el === filterCareer))
+          // 新增棋子 奇异蛋 卧槽, 没有职业类别 并且是个字符串
+          console.log(el)
+          const raceCondition = !filterRace || Boolean(el.cardType && ~el.category.findIndex(el => el === filterRace))
+          const careerCondition = !filterCareer || Boolean(el.cardType && ~el.cardType.findIndex(el => el === filterCareer))
           const qualityCondition = !filterQuality || el.cardQuality === filterQuality
 
           return raceCondition && careerCondition && qualityCondition
