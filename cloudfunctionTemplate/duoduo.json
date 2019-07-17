@@ -2,6 +2,22 @@
   {
     "name": "race",
     "value": {
+      "name": "setCollectitonById",
+      "postId": "5d2cbdff408fed157b9776a6",
+      "userId": "5d2a1b77b33eb42f0c328059"
+    }
+  },
+  {
+    "name": "登录",
+    "value": {
+      "name": "login",
+      "avatar": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLRj9ibjHcuE3lt3hicht5y4LhdhCSMQywgR42oGF7KQwdwYQ57jqzkVl4OWh9ccFBjPK713iaqwFWQg/132",
+      "nickname": "百威"
+    }
+  },
+  {
+    "name": "获取英雄",
+    "value": {
       "name": "heroes"
     }
   }

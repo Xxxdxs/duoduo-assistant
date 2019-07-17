@@ -10,6 +10,17 @@ page {
   color: #5896d5;
 }
 
+.container {
+  position: relative;
+}
+
+.loading-container {
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
 /* height=width纯css怎么做? */
 .cell {
   position: relative;
@@ -20,6 +31,10 @@ page {
 
 .chessboard {
   margin: 12rpx 43rpx 0;
+}
+
+.draw-canvas-wrapper .chessboard {
+  margin: 12rpx 55rpx 0;
 }
 
 /* 范围选择器, cool, 分行, no cool */
@@ -112,40 +127,36 @@ page {
 
 .opertions {
   color: #5896d5;
+  min-height: 34px;
 }
 
 .buff {
   width: 540rpx;
 }
 
+.buff-locked {
+  color: #ff0000;
+  text-decoration: line-through;
+}
+
 .buff-detail {
+  padding: 0 55rpx;
   background: #161f2b;
   color: #5797D5;
 }
 
-.buff-detail-panel {
+.draw-canvas-wrapper {
   position: absolute;
   top: -20000rpx;
-  width: 640rpx;
+  left: 0;
+  right: 0;
+  /* width: 640rpx; */
   background: #161f2b;
   color: #5797D5;
 }
 
 .buff-item-left {
-  width: 80rpx;
-  flex: none;
-}
-
-.buff-item-left .text {
-
-}
-
-.buff-item-content-wrap .text {
-
-}
-
-.buff-item-heros {
-
+  flex: 0 0 80rpx ;
 }
 
 .buff-item-hero {

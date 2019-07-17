@@ -39,8 +39,8 @@
             src="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
             data-type="image"
             data-url="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
-            data-delay="100"
-          ></image>
+          >
+          </image>
           <!-- <star-level wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}" level="{{3}}"></star-level> -->
           <view class="star-wrap" wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}">
             <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
@@ -51,87 +51,94 @@
       </view>
     </van-tab>
   </van-tabs>
-  <view class="opertions d-flex jc-end ai-center mt-1 fs-sm">
-    <view class="buff flex-grow-1" bind:tap="showJibanDetail">
-      <text>羁绊效果: {{jibanText}}</text>
-    </view>
-    <view class="ml-2" bind:tap="deleteChessList">
-      <text class="cuIcon-delete"></text>
-      <text>清空</text>
-    </view>
-    <view class="mx-2" bind:tap="shareChessBoard">
-      <text class="cuIcon-share"></text>
-      <text>保存</text>
-    </view>
-  </view>
-  <view class="hero-filter mt-2">
-    <view class="race-container d-flex ai-center mt-1">
-      <text class="text text-blue1 fs-lg flex-none">种族:</text>
-      <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class="ml-1">
-        <view style="height: 52rpx;" class="d-flex ai-center">
-          <image
-            wx:for="{{raceList}}"
-            wx:key="index" 
-            src="{{ item.name === filterRace? item.ethnicPattern : item.ethnicIcon}}"
-            mode="widthFix"
-            style="width: 40rpx;"
-            class="ml-1"
-            data-race="{{item.name}}" 
-            bind:tap="filterHerosByRace">
-          </image>
+  <block wx:if="{{heroList.length && raceList.length && careerList.length}}">
+    <view class="opertions d-flex jc-end ai-center mt-1 fs-sm">
+        <view class="buff flex-grow-1" bind:tap="showJibanDetail">
+          <!-- <text>羁绊效果: {{jibanText}}</text> -->
+          <text>羁绊效果(点击查看详细): </text>
+          <rich-text nodes="{{jibanRichTextList}}"></rich-text>
         </view>
-      </scroll-view>
-    </view>
-    <view class="career-container d-flex ai-center mt-1">
-      <text class="text text-blue1 fs-lg flex-none">职业:</text>
-      <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class=" ml-1">
-        <view style="height: 52rpx;" class="d-flex ai-center">
-          <image 
-            wx:for="{{careerList}}" 
-            wx:key="index" 
-            src="{{item.name === filterCareer ? item.careerImg : item.careerIcon}}" 
-            mode="widthFix" 
-            style="width: 40rpx;"
-            class="ml-1"
-            data-career="{{item.name}}"
-            bind:tap="filterHerosByCareer">
-          </image>
+        <view class="ml-2" bind:tap="deleteChessList">
+          <text class="cuIcon-delete"></text>
+          <text>清空</text>
         </view>
-      </scroll-view>
-    </view>
-    <view class="quality-container d-flex ai-center mt-1">
-      <text class="text text-blue1 fs-lg flex-none">品质:</text>
-      <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class="ml-1">
-        <view style="height: 52rpx;" class="d-flex ai-center">
-          <view 
-            wx:for="{{qualityList}}" 
-            wx:key="index" 
-            style="{{'background:'+item.color+';'}}"
-            class="quality-filter-btn {{item.name === filterQuality ? 'active' : ''}} ml-1"
-            data-quality="{{item.name}}"
-            bind:tap="filterHerosByQuality">
-         </view>
-        </view>
-      </scroll-view>
-    </view>
-  </view>
-  <view class="hero-list mt-3">
-    <scroll-view wx:if="{{!!heroList.length}}" scroll-y style="">
-      <view class="d-flex flex-wrap">
-        <view
-          wx:for="{{heroListDisplay}}" 
-          wx:key="item.name" style=""
-          class="hero-card d-flex flex-column ai-center"
-          data-name="{{item.name}}" bind:tap="addHero">
-           <view class="avatar-wrap" style="{{item.isSelected ? 'border:1px solid ' + item.qualityColor : ''}}">
-            <image src="{{item.icon}}" mode="widthFix" style="width: 112rpx;"></image>
-            <image src="{{item.miniIcon}}" mode="widthFix" style="width: 0;height: 0;visibility:hidden;" lazy-load="{{true}}"></image>
-            <text wx:if="{{item.isSelected}}" class="choosen cuIcon-roundcheckfill text-yellow"></text>
-           </view>
-           <text>{{item.name}}</text>
+        <view class="mx-2" bind:tap="shareChessBoard">
+          <text class="cuIcon-share"></text>
+          <text>保存</text>
         </view>
       </view>
-    </scroll-view>
+      <view class="hero-filter mt-2" wx:if="{{heroList.length}}">
+        <view class="race-container d-flex ai-center mt-1">
+          <text class="text text-blue1 fs-lg flex-none">种族:</text>
+          <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class="ml-1">
+            <view style="height: 52rpx;" class="d-flex ai-center">
+              <image
+                wx:for="{{raceList}}"
+                wx:key="index" 
+                src="{{ item.name === filterRace? item.ethnicPattern : item.ethnicIcon}}"
+                mode="widthFix"
+                style="width: 40rpx;"
+                class="ml-1"
+                data-race="{{item.name}}" 
+                bind:tap="filterHerosByRace">
+              </image>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="career-container d-flex ai-center mt-1">
+          <text class="text text-blue1 fs-lg flex-none">职业:</text>
+          <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class=" ml-1">
+            <view style="height: 52rpx;" class="d-flex ai-center">
+              <image 
+                wx:for="{{careerList}}" 
+                wx:key="index" 
+                src="{{item.name === filterCareer ? item.careerImg : item.careerIcon}}" 
+                mode="widthFix" 
+                style="width: 40rpx;"
+                class="ml-1"
+                data-career="{{item.name}}"
+                bind:tap="filterHerosByCareer">
+              </image>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="quality-container d-flex ai-center mt-1">
+          <text class="text text-blue1 fs-lg flex-none">品质:</text>
+          <scroll-view scroll-x style="height: 52rpx; white-space: nowrap;" class="ml-1">
+            <view style="height: 52rpx;" class="d-flex ai-center">
+              <view 
+                wx:for="{{qualityList}}" 
+                wx:key="index" 
+                style="{{'background:'+item.color+';'}}"
+                class="quality-filter-btn {{item.name === filterQuality ? 'active' : ''}} ml-1"
+                data-quality="{{item.name}}"
+                bind:tap="filterHerosByQuality">
+            </view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+      <view class="hero-list mt-3">
+        <scroll-view scroll-y style="">
+          <view class="d-flex flex-wrap">
+            <view
+              wx:for="{{heroListDisplay}}" 
+              wx:key="item.name" style=""
+              class="hero-card d-flex flex-column ai-center"
+              data-name="{{item.name}}" bind:tap="addHero">
+              <view class="avatar-wrap" style="{{item.isSelected ? 'border:1px solid ' + item.qualityColor : ''}}">
+                <image src="{{item.icon}}" mode="widthFix" style="width: 112rpx;"></image>
+                <image src="{{item.miniIcon}}" mode="widthFix" style="width: 0;height: 0;visibility:hidden;" lazy-load="{{true}}"></image>
+                <text wx:if="{{item.isSelected}}" class="choosen cuIcon-roundcheckfill text-yellow"></text>
+              </view>
+              <text>{{item.name}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>   
+  </block>
+  <view class="loading-container" wx:if="{{!heroList.length}}">
+    <van-loading color="#5896d5"/>
   </view>
 </view>
 <van-dialog
@@ -146,11 +153,11 @@
     <view class="buff-title fs-md text-primary">
       <text style="font-weight: bold;">羁绊效果:</text>
     </view>
-    <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:key="index" wx:for-item="buffs" >
+    <view class="buff-item d-flex py-1 {{buffs.buffLocked? 'buff-locked': ''}}" wx:for="{{jibanList}}" wx:key="index" wx:for-item="buffs" >
       <view class="buff-item-left d-flex ai-center">
-        <text class="text">{{buffs.list[buffs.list.length - 1][0] + buffs.name}}</text>
+        <text class="text">{{buffs.name == '恶魔' ? buffs.heroList.length + buffs.name: buffs.list[buffs.list.length - 1][0] + buffs.name}}</text>
       </view>
-      <view class="buff-item-content fs-sm"> 
+      <view class="buff-item-content fs-sm">
         <view wx:for="{{buffs.list}}" wx:key="{{index2}}" wx:for-item="buff" wx:for-index="index2" class="buff-item-content-wrap">
           <text class="text">{{buff[1]}}</text>
         </view>
@@ -164,27 +171,57 @@
     </view>
   </view>
 </van-dialog>
-<!-- 因为这van-dialog在点击详情前无法计算style: -->
-<view class="buff-detail fs-xs py-2 buff-detail-panel">
-  <view class="buff-title fs-md text-primary">
-    <view style="font-weight: bold;" class="draw_canvas" data-type="text" data-text="羁绊效果:">羁绊效果:</view>
-  </view>
-  <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:key="{{index}}" wx:for-item="buffs" >
-    <view class="buff-item-left d-flex ai-center">
-      <view class="text draw_canvas" data-type="text" data-text="{{buffs.list[buffs.list.length - 1][0] + buffs.name}}">{{buffs.list[buffs.list.length - 1][0] + buffs.name}}</view>
-    </view>
-    <view class="buff-item-content fs-sm"> 
-      <view wx:for="{{buffs.list}}" wx:key="{{index2}}" wx:for-item="buff" wx:for-index="index2" class="buff-item-content-wrap">
-        <view class="text draw_canvas" data-type="text" data-text="{{buff[1]}}">{{buff[1]}}</view>
+<!-- 因为这van-dialog在点击详情前无法计算style 所以把显示并它藏起来: -->
+<!-- 以下是该隐藏的绘图有关元素 -->
+<view class="draw-canvas-wrapper">
+  <view class="chessboard d-flex flex-wrap ai-start">
+    <view 
+      wx:for="{{chessBoardCellsArray}}" 
+      wx:key="chessBoardCells[index].name"
+      style="{{clickedIndex === index ? 'border: 2rpx dashed #5896d5;' : ''}}"
+      class="cell d-flex jc-center flex-column ai-center"
+      data-name="{{utils.getChessBoardCellProp(chessBoardCells, index, 'name')}}"
+      data-index="{{index}}"
+      bind:tap="clickMoveChess"
+    >
+      <image
+        class="draw_canvas chess"
+        wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}" 
+        src="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
+        data-type="image"
+        data-url="{{utils.getChessBoardCellImgSrc(chessBoardCells, index)}}"
+      ></image>
+      <!-- <star-level wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}" level="{{3}}"></star-level> -->
+      <view class="star-wrap" wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}">
+        <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
+        <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
+        <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>  
       </view>
-      <view class="buff-item-heros d-flex ai-center flex-wrap">
-        <view wx:for="{{buffs.heroList}}" wx:for-item="hero" wx:for-index="index3" wx:key="{{index3}}" class="buff-item-hero d-flex ai-center">
-          <image class="buff-item-hero-avatar draw_canvas" src="{{hero.miniIcon}}" data-type="image" data-url="{{hero.miniIcon}}" data-mode="widthFix" data-delay="100" mode="widthFix" style="width: 40rpx;"></image>
-          <text class="buff-item-hero-name draw_canvas" data-type="text" data-text="{{hero.name}}">{{hero.name}}</text>
+    </view>
+  </view>
+  <view class="buff-detail fs-xs py-2 mt-2">
+    <view class="buff-title fs-md text-primary">
+      <view style="font-weight: bold;" class="draw_canvas" data-type="text" data-text="羁绊效果:">羁绊效果:</view>
+    </view>
+    <!-- 一个图片在不同的list中不同对象中引用两次就不渲染? -->
+    <view class="buff-item d-flex py-1" wx:for="{{jibanList}}" wx:if="{{!buffs.buffLocked}}" wx:key="{{index}}" wx:for-item="buffs" >
+      <view class="buff-item-left d-flex ai-center">
+        <view class="text draw_canvas" data-type="text" data-text="{{buffs.name == '恶魔' ? buffs.heroList.length + buffs.name: buffs.list[buffs.list.length - 1][0] + buffs.name}}">{{buffs.name == '恶魔' ? buffs.heroList.length + buffs.name: buffs.list[buffs.list.length - 1][0] + buffs.name}}</view>
+      </view>
+      <view class="buff-item-content fs-sm"> 
+        <view wx:for="{{buffs.list}}" wx:key="{{index2}}" wx:for-item="buff" wx:for-index="index2" class="buff-item-content-wrap">
+          <view class="text draw_canvas" data-type="text" data-text="{{buff[1]}}">{{buff[1]}}</view>
+        </view>
+        <view class="buff-item-heros d-flex ai-center flex-wrap">
+          <view wx:for="{{buffs.heroList}}" wx:for-item="hero" wx:for-index="index3" wx:key="{{index3}}" class="buff-item-hero d-flex ai-center">
+            <image class="buff-item-hero-avatar draw_canvas" src="{{hero.miniIcon}}" data-type="image" data-url="{{hero.miniIcon}}" data-mode="widthFix" mode="widthFix" style="width: 40rpx;"></image>
+            <text class="buff-item-hero-name draw_canvas" data-type="text" data-text="{{hero.name}}">{{hero.name}}</text>
+          </view>
         </view>
       </view>
     </view>
   </view>
 </view>
+
 <button wx:if="{{false}}" bind:tap="onClick">调试</button>
 <canvas canvas-id="canvas1" style="width: {{canvas1.width}}px;height: {{canvas1.height}}px;position: fixed; top: -20000px;left: 0px;right: 0px;"></canvas>

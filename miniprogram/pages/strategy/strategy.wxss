@@ -1,1 +1,32 @@
 /* miniprogram/pages/strategy/strategy.wxss */
+page {
+  /* background: url(//static.dragonest.com/longyuan-nuxt-website-zzq/production/nuxt/img/bj.9b800de.png); */
+  background: #161f2b;
+}
+
+.navbar {
+  /* background: rgb(250, 250, 250); */
+  background: #141D28;
+  color: #5896d5;
+}
+
+.post-item {
+  background: #161f2b;
+}
+
+.post-item-clicked {
+  /* 这里透明度有点问题 */
+  opacity: 0.9;
+  background: #666;
+}
+
+.container {
+  position: relative;
+}
+
+.loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}

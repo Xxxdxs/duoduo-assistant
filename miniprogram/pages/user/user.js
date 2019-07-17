@@ -1,11 +1,14 @@
 // miniprogram/pages/user/user.js
+const {requestCloud} = require('../../utils/tools.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    avatarUrl: '../../common/img/user-unlogin.png',
+    // 改成common开头的绝对路径反而可以 /或者./开头则不行
+    avatarUrl: 'common/img/user-unlogin.png',
     logged: false,
     userInfo: {}
   },
@@ -13,8 +16,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: async function (options) {
+    
   },
 
   /**
@@ -75,4 +78,20 @@ Page({
       })
     }
   },
+
+  async onGetOpenid() {
+    const res = await wx.cloud.callFunction({
+      name: 'duoduo',
+      data: {
+        name: 'login',
+        avatar: this.data.userInfo.avatarUrl,
+        nickname: this.data.userInfo.nickname
+      }
+    })
+    // 登录以后可以不用再传入其他信息, 因为都保存在数据库了
+    wx.setStorageSync('openId', res.result.openid)
+    wx.setStorageSync('userId', res.result.userId)
+    app.globalData.openId = res.result.openid
+  }
+  // 好像没有公众号和支付功能获取不到unionid, 反正我也只有一个小程序, 就用openid替代
 })

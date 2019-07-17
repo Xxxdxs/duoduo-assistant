@@ -2,11 +2,11 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
-		"es6": true,
+		"urlCheck": false,
+		"es6": false,
 		"enhance": true,
 		"postcss": false,
-		"minified": true,
+		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": false,
@@ -23,7 +23,7 @@
 	},
 	"appid": "wxd9050e85b9c776ca",
 	"projectname": "%E5%A4%9A%E5%A4%9A%E5%B2%9B%E5%B0%8F%E5%8A%A9%E6%89%8B",
-	"libVersion": "2.7.3",
+	"libVersion": "2.7.5",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -44,12 +44,27 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/strategy/strategy",
+					"pathName": "pages/strategy/strategy",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/post/post",
+					"pathName": "pages/post/post",
+					"query": "id=5d2cbdff408fed157b9776a6",
+					"scene": null
 				}
 			]
 		}

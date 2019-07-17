@@ -50,5 +50,10 @@ Component({
         url: '/pages/tools/tools',
       })
     }
+  },
+  lifetimes: {
+    attached() {
+
+    }
   }
 })

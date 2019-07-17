@@ -1,30 +1,28 @@
 // miniprogram/pages/strategy/strategy.js
+const { requestCloud } = require('../../utils/tools.js')
+const BASE_URL = 'http://xlxlx.xyz:3000/client/api/post/list'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    recommendPosts: [],
+    beginnerPosts: [],
+    advancedPosts: [],
+    scrollViewHeight: wx.getStorageSync('ScrollViewHeight')
+  },
+  onLoad: async function (options) {
+    this.fetchPosts()
+    const app = getApp();
+    console.log(app)
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
 
   },
@@ -62,5 +60,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  async fetchPosts() {
+    const res = await requestCloud('strategy')
+    const data = res.result.data
+    this.setData({
+      recommendPosts: data.find(item => item.name === '推荐').postList,
+      beginnerPosts: data.find(item => item.name === '新手攻略').postList,
+      advancedPosts: data.find(item => item.name === '进阶攻略').postList
+    })
+  },
+
+  jumpPage(e) {
+    const {postid} = e.currentTarget.dataset
+    wx.navigateTo({
+      url: `/pages/post/post?id=${postid}`
+    })
   }
 })

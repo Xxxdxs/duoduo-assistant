@@ -4,6 +4,8 @@ const {watch, computed} = require('../../utils/vuify')
 const {sleep} = require('../../utils/tools')
 const {chessBoardCanvasList, createChessBoard} = require('../../common/canvas/chessboard')
 const zoom = wx.getSystemInfoSync().windowWidth / 375
+// TODO
+// 1. 棋子 神族, 恶魔, 猎魔人三种种族时 BUFF要特殊处理, 以后还会有巫师职业, 所以这一块要抽出来
 
 Page({
 
@@ -32,6 +34,7 @@ Page({
     clickedIndex: -1,
     jibanText: '',
     jibanList: [],
+    jibanRichTextList: [], // 或许用富文本表现更好, 省的多加个属性控制样式, 还要每个羁绊分一个text
     imgs: [], // Wxml2Canvas用到的
     canvas1: {
       width: 375 * zoom,
@@ -50,8 +53,7 @@ Page({
       heroListDisplay() {
         const {filterRace, filterCareer, filterQuality} = this.data
         return this.data.heroList.filter(el => {
-          // 新增棋子 奇异蛋 卧槽, 没有职业类别 并且是个字符串
-          console.log(el)
+        // 新增棋子 奇异蛋 卧槽, 没有职业类别 并且是个字符串
           const raceCondition = !filterRace || Boolean(el.cardType && ~el.category.findIndex(el => el === filterRace))
           const careerCondition = !filterCareer || Boolean(el.cardType && ~el.cardType.findIndex(el => el === filterCareer))
           const qualityCondition = !filterQuality || el.cardQuality === filterQuality
@@ -91,7 +93,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+  
   },
 
   /**
@@ -381,31 +383,70 @@ Page({
     // 对象的遍历顺序是没有规范的 所以分开写 种族羁绊在前 职业羁绊在后
     const raceJibanObj = {}
     const careerJibanObj = {}
+    const RACE_LIST_ECP_GOD = ['人族', '光羽族', '恶魔', '哥布林', '野兽', '洞洞族', '海族', '不眠', '冰川族', '龙族', '基拉', '灵族', '矮人族']
     let jibanText = ''
     let jibanList = []
+    let jibanRichTextList = []
+    let dhCount = 0 // 恶魔猎手数量
+    let demoCount = 0 // 恶魔数量
+    let godCount = 0
+    let godBuffLocked = false
+    // 猎魔人, 恶魔, 神族 三个种族需要特殊处理
+
+    function createBuffTextNode(content, __type, isLocked = false) {
+      const buffTextNode = {name: 'span', attrs: {style: `${isLocked ? 'color: #ff0000;text-decoration: line-through;': 'color: #5896d5;'}`, class: 'fs-sm'}, __type, children: [{type: 'text', text: `${content}`}]}
+      return buffTextNode
+    }
+
     raceList.forEach(race => {
       const sameRaceChess = chessGroup.filter(el => el.category.includes(race.name))
       const sameRaceCount = sameRaceChess.length
-
-      raceJibanObj[race.name] = {sameRaceCount, heroList: sameRaceChess}
+      raceJibanObj[race.name] = {sameRaceCount, heroList: sameRaceChess, isLocked: false}
     })
+
+    demoCount = raceJibanObj['恶魔'].sameRaceCount
+    godCount = raceJibanObj['神族'].sameRaceCount
+
     careerList.forEach(career => {
       const sameCareerChess = chessGroup.filter(el => el.cardType.includes(career.name))
       const sameCareerCount = sameCareerChess.length
       careerJibanObj[career.name] = {sameCareerCount, heroList: sameCareerChess}
     })
 
+    dhCount = careerJibanObj['恶魔猎手'].sameCareerCount
+
     for(const k in raceJibanObj) {
       const raceSkills = raceList.find(el => el.name === k).skills
       if (raceJibanObj[k].sameRaceCount > 0) {
         const _raceSkills = raceSkills.filter((el, i) => el[0] <= raceJibanObj[k].sameRaceCount)
         if (_raceSkills.length) {
-          jibanList.push({name: k, list: _raceSkills, heroList: raceJibanObj[k].heroList})
-          const raceJibanText = _raceSkills[_raceSkills.length - 1][0] + k
-          jibanText += raceJibanText + ' '
+          // 恶魔文本要特别处理
+          if (k === '恶魔') {
+            jibanList.push({name: k, list: _raceSkills, heroList: raceJibanObj[k].heroList})
+            const raceJibanText = demoCount + k
+            jibanText += raceJibanText + ' '
+            jibanRichTextList.push(createBuffTextNode(raceJibanText + ' ', k))
+          } else {
+            jibanList.push({name: k, list: _raceSkills, heroList: raceJibanObj[k].heroList})
+            const raceJibanText = _raceSkills[_raceSkills.length - 1][0] + k
+            jibanText += raceJibanText + ' '
+            jibanRichTextList.push(createBuffTextNode(raceJibanText + ' ', k))
+          }
         }
       }
     }
+    // 种族羁绊中存在任何其他种族羁绊 神族失效
+    if (jibanList.some(item => RACE_LIST_ECP_GOD.includes(item.name))) {
+      godBuffLocked = true
+    }
+    
+    if (godBuffLocked && godCount) {
+      const index = jibanRichTextList.findIndex(item => item.__type === '神族')
+      
+      jibanRichTextList.splice(index, 1, createBuffTextNode(jibanRichTextList[index].children[0].text, '神族', godBuffLocked))
+      jibanList.find(item => item.name === '神族').buffLocked = true
+    }
+    
 
     for(const k in careerJibanObj) {
       const careerSkills = careerList.find(el => el.name === k).skills
@@ -415,13 +456,23 @@ Page({
           jibanList.push({name: k, list: _careerSkills, heroList: careerJibanObj[k].heroList})
           const careerJibanText = _careerSkills[_careerSkills.length - 1][0] + k
           jibanText += careerJibanText + ' '
+          jibanRichTextList.push(createBuffTextNode(careerJibanText + ' ', k))
         }
       }
     }
 
+    if (demoCount > 1 && dhCount < 2) {
+      // 如果恶魔存在且恶魔猎手数量小于2 则恶魔buff失效
+      const index = jibanRichTextList.findIndex(item => item.__type === '恶魔')
+      jibanRichTextList.splice(index, 1, createBuffTextNode(jibanRichTextList[index].children[0].text, '恶魔', true))
+      jibanList.find(item => item.name = '恶魔').buffLocked = true
+    }
+
+    // 只能最后处理, 因为DH是职业 jibanRichTextListtime
     this.setData({
       jibanText,
-      jibanList
+      jibanList,
+      jibanRichTextList
     })
   },
 
@@ -457,11 +508,10 @@ Page({
     await sleep(500)
     const drawImage = new Wxml2Canvas({
         width: 375, // 宽， 以iphone6为基准，传具体数值，其他机型自动适配
-        height: (80 + 190 + this.data.buffTextHeight + 10) , // 图片的高 为各部分计算而来(插件BUG, 手动*zoom)
+        height: (80 + this.data.buffTextHeight + 10 + 19) , // 图片的高 为各部分计算而来(插件BUG, 手动*zoom)
         element: 'canvas1', 
         background: '#161f2b',
         progress (percent) {
-          console.log(percent)
           if (percent === 100) {
             wx.hideLoading()
           }
@@ -478,6 +528,7 @@ Page({
           //   current: current, // 当前显示图片的http链接  
           //   urls: this.data.imglist // 需要预览的图片http链接列表  
           // })
+
           wx.saveImageToPhotosAlbum({
             filePath: url,
             success(result) {
@@ -496,31 +547,32 @@ Page({
     })
     // 绘图存在很多BUG
     // 待解决 重复图片第二次不绘制
-    // 虽然将buff效果和棋盘棋子渲染顺序倒过来暂时解决
+    // 只能讲要画图的部分合并到一个wxml中
+    // , {
+    //   // 棋盘棋子
+    //   type: 'wxml',
+    //   class: '.panel .draw_canvas',
+    //   limit: '.panel',
+    //   x: 27.5,
+    //   y: 25
+    // }
     let data = {
         list: [
           ...createChessBoard(), {
-            // buff效果
+            // buff效果and棋子
             type: 'wxml',
-            class: '.buff-detail-panel .draw_canvas',
-            limit: '.buff-detail-panel',
-            x: 27.5,
-            y: 190
+            class: '.draw-canvas-wrapper .draw_canvas',
+            limit: '.draw-canvas-wrapper',
+            x: 0,
+            y: 19
           }, {
-          // 棋盘棋子
-          type: 'wxml',
-          class: '.panel .draw_canvas',
-          limit: '.panel',
-          x: 27.5,
-          y: 25
-        }, {
-          // 二维码
+            // 二维码
           type: 'image',
             url: '/common/qrcode/qrcode.jpeg',
             // delay: true,
             x: 27.5,
             // 要动态计算的...
-            y: (190 + this.data.buffTextHeight),
+            y: (this.data.buffTextHeight + 19),
             style: {
               width: 80,
               height: 80
@@ -530,7 +582,7 @@ Page({
           type: 'text',
           text: '一直下棋, 一直爽! by多多岛小助手',
           x: 125,
-          y: (190 + this.data.buffTextHeight + 20),
+          y: (this.data.buffTextHeight + 20 + 19),
           style: {
             fontSize: 10,
               lineHeight: 20,
@@ -540,9 +592,9 @@ Page({
         }, {
           // 介绍文本
           type: 'text',
-          text: '长按识别二维码进入小程序',
+          text: '长按识别二维码进入微信小程序',
           x: 125,
-          y: (190 + this.data.buffTextHeight + 40),
+          y: (this.data.buffTextHeight + 40 + 19),
           style: {
             fontSize: 10,
               lineHeight: 20,
@@ -559,9 +611,9 @@ Page({
     })
   },
 
-  CalcBuffTextHeight() {
+  CalcBuffTextHeight() {                                                                                    
     const self = this
-    wx.createSelectorQuery().select('.buff-detail-panel').fields({
+    wx.createSelectorQuery().select('.draw-canvas-wrapper').fields({
       size: true
     }, function(res) {
       self.setData({

@@ -1,2 +1,76 @@
-<!--miniprogram/pages/strategy/strategy.wxml-->
-<text>miniprogram/pages/strategy/strategy.wxml</text>
+<cu-custom bgColor="navbar" isCustom="{{true}}">
+  <view slot="content">下棋攻略</view>
+</cu-custom>
+<view class="container">
+  <view class="loading-container" wx:if="{{!recommendPosts.length}}">
+    <van-loading color="#5896d5"/>
+  </view>
+  <van-tabs animated swipeable line-width="0">
+  <van-tab title="推荐">
+    <scroll-view scroll-y class="scroll-content px-2" style="height: {{scrollViewHeight}}px">
+      <view wx:for="{{recommendPosts}}" wx:key="_id" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
+        <view class="post-content d-flex flex-column flex-grow-1 p-2">
+          <view class="post-title flex-grow-1">
+              {{item.title}}
+          </view>
+          <view class="post-bottom fs-xs d-flex" style="flex: none;">
+            <view class="post-category">{{item.author}}</view>
+            <view class="flex-grow-1"></view>
+            <view class="post-readCount">
+              <text class="cuIcon-attention"></text>
+              <text>{{" " + item.readCount}} </text> 
+            </view>
+            </view>
+          </view>
+          <view style="width: 300rpx;flex: none;" class="thumbnail ml-2">
+            <image src="{{item.thumbnail}}" mode="scaleToFill" style="width: 300rpx; height: 170rpx;"></image>
+          </view>
+        </view>
+      </scroll-view>
+    </van-tab>
+    <van-tab title="新手">
+      <scroll-view scroll-y class="scroll-content px-2" style="height: {{scrollViewHeight}}px">
+        <view wx:for="{{beginnerPosts}}" wx:key="_id" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
+          <view class="post-content d-flex flex-column flex-grow-1 p-2">
+            <view class="post-title flex-grow-1">
+              {{item.title}}
+            </view>
+            <view class="post-bottom fs-xs d-flex" style="flex: none;">
+              <view class="post-category">{{item.author}}</view>
+              <view class="flex-grow-1"></view>
+              <view class="post-readCount">
+                <text class="cuIcon-attention"></text>
+                <text>{{" " + item.readCount}} </text> 
+              </view>
+            </view>
+          </view>
+          <view style="width: 300rpx;flex: none;" class="thumbnail ml-2">
+            <image src="{{item.thumbnail}}" mode="scaleToFill" style="width: 300rpx; height: 170rpx;"></image>
+          </view>
+        </view>
+      </scroll-view>
+    </van-tab>
+    <van-tab title="进阶">
+      <scroll-view scroll-y class="scroll-content px-2" style="height: {{scrollViewHeight}}px">
+        <view wx:for="{{advancedPosts}}" wx:key="_id" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
+          <view class="post-content d-flex flex-column flex-grow-1 p-2">
+            <view class="post-title flex-grow-1">
+              {{item.title}}
+            </view>
+            <view class="post-bottom fs-xs d-flex" style="flex: none;">
+              <view class="post-category">{{item.author}}</view>
+              <view class="flex-grow-1"></view>
+              <view class="post-readCount">
+                <text class="cuIcon-attention"></text>
+                <text>{{" " + item.readCount}} </text> 
+              </view>
+            </view>
+          </view>
+          <view style="width: 300rpx;flex: none;" class="thumbnail ml-2">
+            <image src="{{item.thumbnail}}" mode="scaleToFill" style="width: 300rpx; height: 170rpx;"></image>
+          </view>
+        </view>
+      </scroll-view>
+    </van-tab>
+  </van-tabs>
+</view>

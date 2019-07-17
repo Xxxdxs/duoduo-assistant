@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "star-level": "../../components/star-level/star-level"
+    "star-level": "../../components/star-level/star-level",
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "navigationBarTitleText": "阵容模拟器"
 }
