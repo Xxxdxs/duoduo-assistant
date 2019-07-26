@@ -1,6 +1,7 @@
 // miniprogram/pages/strategy/strategy.js
 const { requestCloud } = require('../../utils/tools.js')
 const BASE_URL = 'http://xlxlx.xyz:3000/client/api/post/list'
+const app = getApp()
 
 Page({
 
@@ -11,12 +12,10 @@ Page({
     recommendPosts: [],
     beginnerPosts: [],
     advancedPosts: [],
-    scrollViewHeight: wx.getStorageSync('ScrollViewHeight')
+    scrollViewHeight: app.globalData.ScrollViewHeight
   },
   onLoad: async function (options) {
     this.fetchPosts()
-    const app = getApp();
-    console.log(app)
   },
 
   onReady: function () {

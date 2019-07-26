@@ -21,7 +21,7 @@
           <view class="post-source">
             <text>{{source.name}}</text>
             <text>{{" | "}}</text>
-            <text>{{"1天前"}}</text>
+            <text>{{pastTimeText}}</text>
           </view>
         </view>
         <view class="post-collect mr-2" bind:tap="collectPost">

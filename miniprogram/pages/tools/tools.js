@@ -1,8 +1,7 @@
-// miniprogram/pages/tools/tools.js
+const { watch, computed } = require('../../utils/vuify')
+const { sleep } = require('../../utils/tools')
 const Wxml2Canvas = require('../../wxml2canvas/index.js')
-const {watch, computed} = require('../../utils/vuify')
-const {sleep} = require('../../utils/tools')
-const {chessBoardCanvasList, createChessBoard} = require('../../common/canvas/chessboard')
+const { chessBoardCanvasList, createChessBoard } = require('../../common/canvas/chessboard')
 const zoom = wx.getSystemInfoSync().windowWidth / 375
 // TODO
 // 1. 棋子 神族, 恶魔, 猎魔人三种种族时 BUFF要特殊处理, 以后还会有巫师职业, 所以这一块要抽出来
@@ -54,7 +53,7 @@ Page({
         const {filterRace, filterCareer, filterQuality} = this.data
         return this.data.heroList.filter(el => {
         // 新增棋子 奇异蛋 卧槽, 没有职业类别 并且是个字符串
-          const raceCondition = !filterRace || Boolean(el.cardType && ~el.category.findIndex(el => el === filterRace))
+          const raceCondition = !filterRace || Boolean(el.category && ~el.category.findIndex(el => el === filterRace))
           const careerCondition = !filterCareer || Boolean(el.cardType && ~el.cardType.findIndex(el => el === filterCareer))
           const qualityCondition = !filterQuality || el.cardQuality === filterQuality
 
@@ -68,18 +67,6 @@ Page({
     })
     await Promise.all([this.getHerosData(), this.getQualityData(), this.getCareerData(), this.getRacesData()])
     this.editHeroList()
-    // wx.cloud.downloadFile({
-    //   fileID: 'cloud://cloud-dev-0f318b.636c-cloud-dev-0f318b-1257264379/duoduo/hero_1001.png', //仅为示例，并非真实的资源
-    //   success (res) {
-    //     // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-    //     if (res.statusCode === 200) {
-    //       console.log('下载完毕')
-    //     }
-    //   },
-    //   fail(err) {
-    //     console.log(err)
-    //   }
-    // })
   },
 
   /**
@@ -497,9 +484,10 @@ Page({
     this.setData({ close: false });
   },
   /**
-   * 生成图片
+   * 已解决 生成图片
    * 不在iphone6上面绘图时, 会产生一点点误差
    * 并且文字换行也有问题
+   * 只存在一个wxml时, 问题同时解决
    */
   async drawImage1 () {
     let self = this
@@ -546,16 +534,9 @@ Page({
         }
     })
     // 绘图存在很多BUG
-    // 待解决 重复图片第二次不绘制
-    // 只能讲要画图的部分合并到一个wxml中
-    // , {
-    //   // 棋盘棋子
-    //   type: 'wxml',
-    //   class: '.panel .draw_canvas',
-    //   limit: '.panel',
-    //   x: 27.5,
-    //   y: 25
-    // }
+    // 已解决 重复图片第二次不绘制
+    // 只能将要画图的部分合并到一个wxml中
+    // 不能存在两个wxml
     let data = {
         list: [
           ...createChessBoard(), {
@@ -620,50 +601,5 @@ Page({
         buffTextHeight: res.height / zoom
       })
     }).exec()
-  },
-
-  onClick() {
-    // wx.canvasToTempFilePath({
-    //   canvasId: 'canvas1',
-    //   success: function (res) {
-    //     console.log(res);
-    //     wx.saveImageToPhotosAlbum({
-    //       filePath: res.tempFilePath,
-    //       success(result) {
-    //         wx.showToast({
-    //           title: '图片保存成功2',
-    //           icon: 'success',
-    //           duration: 2000
-    //         })
-    //       }
-    //     })
-      
-    // }})
-      // wx.request({
-      //   url: 'https://api.weixin.qq.com/cgi-bin/token',
-      //   method: 'GET',
-      //   data: {
-      //     grant_type: 'client_credential',
-      //     appid: 'wxd9050e85b9c776ca',
-      //     secret: ''
-      //   },
-      //   success(res1) {
-      //     console.log(res1)
-      //     wx.request({
-      //       url: `https://api.weixin.qq.com/wxa/getwxacode?access_token=${res1.data.access_token}`, //仅为示例，并非真实的接口地址
-      //       method: 'POST',
-      //       data: {
-      //         "path": "pages/tools/tools",
-      //         "width": 280
-      //       },
-      //       success(res2) {
-      //         console.log(res2)
-      //       }
-      //     })
-      //   }
-      // })
-
-    // this.CalcBuffTextHeight()
   }
 })
-

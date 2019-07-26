@@ -1,10 +1,17 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-const heromap = require('./heromap.json')
 const axios = require('axios')
-const BASE_URL = 'http://xlxlx.xyz:3000/client/api'
 
-cloud.init()
+const isDev = false
+const DEV_BASE_URL = 'http://localhost:3000/client/api'
+const PROD_BASE_URL = 'http://xlxlx.xyz:3000/client/api'
+
+const BASE_URL = isDev ? DEV_BASE_URL : PROD_BASE_URL
+// cloud-dev-0f318b cloud-prod-yg88k
+cloud.init({
+  env: process.env.cloudName
+})
+
 const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -65,6 +72,14 @@ exports.main = async (event, context) => {
       return { data: res.data }
     }
 
+    if (event.name === 'setLikeById') {
+      const { postId, userId } = event
+      const res = await axios.post(BASE_URL + `/like/${postId}`, {
+        userId
+      })
+      return { data: res.data }
+    }
+
     if (event.name === 'getPostById') {
       const {postId, userId} = event
       const res = await axios.get(BASE_URL + `/post/${postId}`, {
@@ -103,16 +118,3 @@ exports.main = async (event, context) => {
     console.log(e)
   }
 }
-
-// if (event.name === 'alterDB') {
-//   console.log(heromap)
-//   for (let item of heromap) {
-//     await db.collection('heroes').doc(item._id).update({
-//       data: {
-//         miniIcon: item.miniIcon
-//       }
-//     })
-//   }
-//   const data = await db.collection('heroes').where({}).get()
-//   return data
-// }

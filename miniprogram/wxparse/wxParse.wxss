@@ -1,6 +1,7 @@
 @import './highlight/styles/dark.wxss';
 @import '../style/quill.wxss';
 
+/* 重置样式 */
 .ql-editor{
   padding-left: 0;
   padding-right: 0;
@@ -8,9 +9,30 @@
   padding-top: 0;
 }
 
+.ql-editor .wxParse-inline {
+  background: none !important;
+}
+
+.wxParse-inline {
+  background: none !important;
+  color: #fff;
+}
+
+span {
+  background: none !important;
+  color: #fff;
+}
+
 img {
   display: inline-block;
+  max-width: 100%;
 }
+
+/* img * {
+  display: none;
+} */
+
+/* 重置样式结束 */
 
 .wxparse{
   font-size: 28rpx;

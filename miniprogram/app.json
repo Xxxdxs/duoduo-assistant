@@ -40,7 +40,7 @@
         "pagePath": "pages/strategy/strategy",
         "iconPath": "common/img/strategy.png",
         "selectedIconPath": "common/img/strategy-active.png",
-        "text": "工具"
+        "text": "攻略"
       },
       {
         "pagePath": "pages/user/user",

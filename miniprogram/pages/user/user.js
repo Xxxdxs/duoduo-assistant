@@ -8,7 +8,7 @@ Page({
    */
   data: {
     // 改成common开头的绝对路径反而可以 /或者./开头则不行
-    avatarUrl: 'common/img/user-unlogin.png',
+    avatarUrl: 'http://cdn.xlxlx.xyz/user-unlogin.png',
     logged: false,
     userInfo: {}
   },
@@ -92,6 +92,12 @@ Page({
     wx.setStorageSync('openId', res.result.openid)
     wx.setStorageSync('userId', res.result.userId)
     app.globalData.openId = res.result.openid
-  }
+  },
   // 好像没有公众号和支付功能获取不到unionid, 反正我也只有一个小程序, 就用openid替代
+  hintNotCompleted() {
+    wx.showToast({
+      title: '功能未完成',
+      icon: 'none'
+    })
+  }
 })

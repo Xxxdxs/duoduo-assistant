@@ -15,7 +15,7 @@
             data-name="{{chessGroup[index].name}}"
             data-index="{{index}}"
           >
-            <image wx:if="{{chessGroup[index].name}}" src="{{chessGroup[index].icon}}" data-type="image" data-url="https://636c-cloud-dev-0f318b-1257264379.tcb.qcloud.la/duoduo/hero_1001.png?sign=75fd770af3195d5c69aac6518d230ee7&t=1562265901" mode="widthFix" style="width: 120rpx;" class="chess-card-img"></image>
+            <image wx:if="{{chessGroup[index].name}}" src="{{chessGroup[index].icon}}" data-type="image" mode="widthFix" style="width: 120rpx;" class="chess-card-img"></image>
             <text wx:else class="cuIcon-add" data-type="text" style="font-size: 32px;"></text>
             <view wx:if="{{chessGroup[index].name}}" data-type="text" class="chess-card-text fs-xs text-center">{{chessGroup[index].name}}</view>
           </view>
@@ -45,7 +45,7 @@
           <view class="star-wrap" wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}">
             <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
             <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
-            <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>  
+            <image wx:if="{{chessBoardCells[index].name != '奇异蛋'}}" class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
           </view>
         </view>
       </view>
@@ -128,7 +128,7 @@
               data-name="{{item.name}}" bind:tap="addHero">
               <view class="avatar-wrap" style="{{item.isSelected ? 'border:1px solid ' + item.qualityColor : ''}}">
                 <image src="{{item.icon}}" mode="widthFix" style="width: 112rpx;"></image>
-                <image src="{{item.miniIcon}}" mode="widthFix" style="width: 0;height: 0;visibility:hidden;" lazy-load="{{true}}"></image>
+                <!-- <image src="{{item.miniIcon}}" mode="widthFix" style="width: 0;height: 0;visibility:hidden;" lazy-load="{{true}}"></image> -->
                 <text wx:if="{{item.isSelected}}" class="choosen cuIcon-roundcheckfill text-yellow"></text>
               </view>
               <text>{{item.name}}</text>
@@ -195,7 +195,7 @@
       <view class="star-wrap" wx:if="{{utils.hasChessListContainsIndex(chessBoardCells, index)}}">
         <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
         <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>
-        <image class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>  
+        <image wx:if="{{chessBoardCells[index].name != '奇异蛋'}}" class="star draw_canvas" data-type="image" data-url="../../common/img/star_three.png" src="../../common/img/star_three.png"></image>  
       </view>
     </view>
   </view>

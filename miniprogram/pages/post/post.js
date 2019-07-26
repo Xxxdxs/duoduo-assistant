@@ -1,5 +1,6 @@
 // miniprogram/pages/post/post.js
 const {requestCloud} = require('../../utils/tools.js')
+const { format } = require('../../common/js/timeago.min.js')
 const BASE_URL = 'http://xlxlx.xyz:3000/client/api'
 const app = getApp()
 
@@ -12,33 +13,14 @@ Page({
     post: {},
     sources: [],
     source: {},
-    isLike: false
+    isLike: false,
+    pastTimeText: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    // wx.cloud.callFunction({
-    //   name: 'duoduo',
-    //   data: {
-    //     name: 'strategy'
-    //   },
-    //   success(res) {
-    //     self.setData({
-    //       post: res.result.data[0].body
-    //     })
-    //   }
-    // })
-    
-    // wx.request({
-    //   url: BASE_URL + self.options.id,
-    //   success(res) {
-    //     self.setData({
-    //       post: res.data
-    //     })
-    //   }
-    // })
     await Promise.all([this.fetchPost(options.id), this.fetchSources(), app.getUserId()])
     this.getSource(this.data.post, this.data.sources)
   },
@@ -100,13 +82,13 @@ Page({
   },
 
   async fetchPost(id) {
-    const app = getApp();
     const res = await requestCloud('getPostById', {
       postId: id
-    }, app)
+    }, app, false)
     this.setData({
       post: res.result.data
     })
+    this.calcPastTimeText()
   },
 
   getSource(post, sources) {
@@ -117,7 +99,6 @@ Page({
   },
 
   async collectPost() {
-    const app = getApp();
     wx.showLoading({
       title: '请求中...',
     })
@@ -135,12 +116,34 @@ Page({
         title: '失败'
       })
     }
-
   },
 
-  onTapLike() {
+  async onTapLike() {
+    // 点赞用户的点赞列表+1
+    // 后端查询点赞列表，isLike字段
+    // 文章的点赞数+1
+    wx.showLoading({
+      title: '请求中...',
+    })
+    const res = await requestCloud('setLikeById', { postId: this.data.post._id }, app)
+    wx.hideLoading()
+    if (res.result.data.ok) {
+      this.setData({
+        post: { ...this.data.post, isLiked: !this.data.post.isLiked }
+      })
+      wx.showToast({
+        title: '谢谢支持'
+      })
+    } else {
+      wx.showToast({
+        title: 'oops点赞失败'
+      })
+    }
+  },
+
+  calcPastTimeText() {
     this.setData({
-      isLike: !this.data.isLike
+      pastTimeText: format(this.data.post.createdAt, 'zh_CN')
     })
   }
 })

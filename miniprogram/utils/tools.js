@@ -9,12 +9,12 @@ function sleep(ms) {
 }
 
 // 传入一些默认参数
-async function requestCloud(funcName, data, app) {
+async function requestCloud(funcName, data, app, needLogin) {
   let userId = ''
   if (app) {
     userId = await app.getUserId()
 
-    if (!userId) {
+    if (!userId && needLogin) {
       wx.showToast({
         title: '没有登录',
         icon: 'none'
