@@ -13,6 +13,10 @@
 ![image](https://raw.githubusercontent.com/TheLostXianXian/duoduo-assistant/master/images/001.jpeg)
 ![image](https://raw.githubusercontent.com/TheLostXianXian/duoduo-assistant/master/images/002.jpeg)
 ![image](https://raw.githubusercontent.com/TheLostXianXian/duoduo-assistant/master/images/003.jpeg)
+![image](https://raw.githubusercontent.com/TheLostXianXian/duoduo-assistant/master/images/004.jpeg)
+![image](https://raw.githubusercontent.com/TheLostXianXian/duoduo-assistant/master/images/005.jpeg)
+![image](https://raw.githubusercontent.com/TheLostXianXian/duoduo-assistant/master/images/006.jpeg)
+![image](https://raw.githubusercontent.com/TheLostXianXian/duoduo-assistant/master/images/007.jpeg)
 
 ## TODO
 1. [x] 增加攻略, 个人中心页面.
