@@ -1,14 +1,12 @@
 /* miniprogram/pages/tools/tools.wxss */
-page {
-  /* background: url(//static.dragonest.com/longyuan-nuxt-website-zzq/production/nuxt/img/bj.9b800de.png); */
+/* page {
   background: #161f2b;
-}
+} */
 
-.navbar {
-  /* background: rgb(250, 250, 250); */
+/* .navbar {
   background: #141D28;
   color: #5896d5;
-}
+} */
 
 .container {
   position: relative;
@@ -126,7 +124,6 @@ page {
 }
 
 .opertions {
-  color: #5896d5;
   min-height: 34px;
 }
 
@@ -141,8 +138,7 @@ page {
 
 .buff-detail {
   padding: 0 55rpx;
-  background: #161f2b;
-  color: #5797D5;
+  background: #2A1A18;
 }
 
 .draw-canvas-wrapper {
@@ -152,7 +148,6 @@ page {
   right: 0;
   /* width: 640rpx; */
   background: #161f2b;
-  color: #5797D5;
 }
 
 .buff-item-left {
@@ -186,4 +181,16 @@ page {
   left: 15rpx;
   right: 15rpx;
   bottom: 25rpx;
+}
+
+.chess-desc-btn {
+  margin-top: 8rpx;
+  width: 100rpx;
+  height: 32rpx;
+  border-radius: 16rpx;
+  line-height: 32rpx;
+  vertical-align: middle;
+  font-size: 20rpx;
+  text-align: center;
+  background: #b39b54;
 }

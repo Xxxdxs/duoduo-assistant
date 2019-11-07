@@ -1,0 +1,125 @@
+<!--miniprogram/pages/hero/hero.wxml-->
+<cu-custom bgColor="navbar" isCustom>
+  <view slot="content">英雄介绍</view>
+</cu-custom>
+<view class="container pt-4 px-3 pb-5 text-normal">
+  <view class="content-top d-flex ai-center" >
+    <view class="image-wrap bg-gold flex-none" style="flex-basis: 200rpx;">
+      <image style="width: 200rpx;height:200rpx;" src="{{hero.icon}}" bind:tap="test"></image>
+    </view>
+    <view class="hero-baseinfo d-flex flex-column ml-4" style="height: 200rpx;">
+      <view class="hero-name fs-xl mt-2" style="font-weight: bold;">{{hero.name}}</view>
+      <view class="hero-quality mt-2">
+        <text style="color: {{hero.cardQuality.color}};">{{hero.cardQuality.name}}</text>
+        <text class="ml-4">{{hero.cardExpend + '金币'}}</text>
+      </view>
+      <view class="hero-category d-flex ai-center mt-3">
+        <view class="hero-race d-flex ai-center ml-2" wx:for="{{hero.category}}" wx:key="{{index}}">
+          <image src="{{item.icon}}" style="width: 1em; height: 1em"></image>
+          <view class="ml-1">{{item.name}}</view>
+        </view>
+        <view class="hero-career ml-5 d-flex ai-center" wx:for="{{hero.cardType}}" wx:key="{{index}}">
+          <image src="{{item.icon}}" style="width: 1em; height: 1em"></image>
+          <view class="ml-1">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="content-prop">
+    <view class="content-title text-xl text-left" style="font-weight: bold;">棋子属性</view>
+    <view class="d-flex prop-item ai-center">
+        <view class="prop-name"></view>
+        <view class="prop-desc d-flex ai-center">
+          <view class="prop-desc-item">
+            <van-rate
+              readonly
+              value="{{ 1 }}"
+              count="{{ 1 }}"
+            />
+          </view>
+          <view class="prop-desc-item">
+            <van-rate
+              readonly
+              value="{{ 2 }}"
+              count="{{ 2 }}"
+            />
+          </view>
+          <view class="prop-desc-item">
+            <van-rate
+            readonly
+            value="{{ 3 }}"
+            count="{{ 3 }}"
+            />
+        </view>
+      </view>
+    </view>
+    <view class="prop-health prop-item d-flex ai-center">
+      <view class="prop-name">血量</view>
+      <view class="prop-desc d-flex ai-center">
+        <view class="prop-desc-item">{{hero.lifeValue}}</view>
+        <view class="prop-desc-item">{{hero.twoStarLifeValue}}</view>
+        <view class="prop-desc-item">{{hero.threeStarLifeValue}}</view>
+      </view>
+    </view>
+    <view class="prop-attack prop-item d-flex ai-center">
+      <view class="prop-name">攻击力</view>
+      <view class="prop-desc d-flex ai-center">
+        <view class="prop-desc-item">{{hero.attackPower}}</view>
+        <view class="prop-desc-item">{{hero.twoStarAttackPower}}</view>
+        <view class="prop-desc-item">{{hero.threeStarAttackPower}}</view>
+      </view>
+    </view>
+    <view class="prop-attackSpeed prop-item d-flex ai-center">
+      <view class="prop-name">攻速</view>
+      <view class="prop-desc d-flex ai-center">
+        <view class="prop-desc-item">{{hero.attackSpeed}}</view>
+        <view class="prop-desc-item">{{hero.twoStarAttackSpeed}}</view>
+        <view class="prop-desc-item">{{hero.threeStarAttackSpeed}}</view>
+      </view>
+    </view>
+    <view class="prop-attack-range prop-item d-flex ai-center">
+      <view class="prop-name">射程</view>
+      <view class="prop-desc d-flex ai-center">
+        <view class="prop-desc-item">{{hero.attackDistance}}</view>
+        <view class="prop-desc-item">{{hero.twoStarAttackDistance}}</view>
+        <view class="prop-desc-item">{{hero.threeStarAttackDistance}}</view>
+      </view>
+    </view>
+    <view class="prop-armor prop-item d-flex ai-center">
+      <view class="prop-name">护甲</view>
+      <view class="prop-desc d-flex ai-center">
+        <view class="prop-desc-item">{{hero.armor}}</view>
+        <view class="prop-desc-item">{{hero.twoStarArmor}}</view>
+        <view class="prop-desc-item">{{hero.threeStarArmor}}</view>
+      </view>
+    </view>
+    <view class="prop-magicResistance prop-item d-flex ai-center">
+      <view class="prop-name">魔抗</view>
+      <view class="prop-desc d-flex ai-center">
+        <view class="prop-desc-item">{{hero.magicResistance}}</view>
+        <view class="prop-desc-item">{{hero.twoStarMagicResistance}}</view>
+        <view class="prop-desc-item">{{hero.threeStarMagicResistance}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="content-skill"></view>
+
+  <view class="content-voice content-prop mt-3">
+    <view class="content-title text-xl text-left" style="font-weight: bold;">登场语音</view>
+    <view class="voice-item d-flex prop-item" wx:for="{{hero.showupVoice}}" wx:key="{{index}}">
+      <view class="voice-name prop-name text-center">登场语音{{ index + 1}}</view>
+      <view class="voice-desc prop-desc d-flex ai-center jc-between">
+        <view class="voice-listen prop-desc-item" data-src="{{item}}" bind:tap="playVoice">
+          <text class="cuIcon-notification ml-4"></text>
+          <text>试听</text>
+        </view>
+        <view class="voice-download prop-desc-item" data-src="{{item}}" bind:tap="downloadVoice">
+          <text class="cuIcon-down"></text>
+          <text>下载</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

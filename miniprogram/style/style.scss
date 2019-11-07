@@ -1,9 +1,15 @@
 // 基础通用和工具样式
+// "primary": #5797D5,
+// "primary1": #161f2b,
 $colors: (
-  "primary": #5797D5,
+  "primary": #FFEFD4,
+  "primary1": #938373,
+  "normal": #AD9D85,
   "white": #FFF,
   "black": #000,
   "light": #F9F9F9,
+  "gold1": #b39b54,
+  "gold2": #b49c55,
   "grey1": #d4e2f4,
   "grey2": #b5c2e7,
   "blue1": #5878b1,
@@ -150,4 +156,8 @@ $spacing-sizes: (
 
 .flex-wrap {
   flex-wrap: wrap
+}
+
+.flex-none {
+  flex: none;
 }

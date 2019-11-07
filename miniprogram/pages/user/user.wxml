@@ -18,11 +18,16 @@
       <text class="userinfo-nickname">{{logged ? '欢迎你 ' + userInfo.nickName: '点击头像登录'}}</text>
     </view>
   </view>
-  <view class="chess-table mt-4" >
-    <button class="plain-button" bind:tap="hintNotCompleted">棋子图鉴</button>
+  <view class="chess-table mt-4 " >
+    <button class="plain-button text-gold1" hover-class="plain-button-clicked" bind:tap="hintNotCompleted">棋子图鉴</button>
   </view>
-  <view class="my-collection mt-1" >
-    <button class="plain-button" bind:tap="hintNotCompleted">我的收藏</button>
+  <view class="my-collection mt-1 " >
+    <button class="plain-button text-gold1" hover-class="plain-button-clicked" bind:tap="jumpToCollection">我的收藏</button>
   </view>
-  <view class="placeholder">如果有任何意见或建议, 请点击右上角"关于"中"反馈和投诉"</view>
+  <view class="placeholder text-center">
+    <view>如果有意见或建议, 请点击右上角"关于"中"反馈和投诉"。</view>
+    <view>如果攻略能帮到大家，可以去来源的社区支持大神。</view>
+    <view>攻略页面打不开，试试下拉长按小程序删除后重试</view>
+    <view>祝大家大吉大利，今晚吃鸡。</view>
+  </view>
 </view>

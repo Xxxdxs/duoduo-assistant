@@ -1,7 +1,7 @@
 // miniprogram/pages/post/post.js
 const {requestCloud} = require('../../utils/tools.js')
 const { format } = require('../../common/js/timeago.min.js')
-const BASE_URL = 'http://xlxlx.xyz:3000/client/api'
+
 const app = getApp()
 
 Page({
@@ -13,7 +13,6 @@ Page({
     post: {},
     sources: [],
     source: {},
-    isLike: false,
     pastTimeText: ''
   },
 
@@ -86,7 +85,7 @@ Page({
       postId: id
     }, app, false)
     this.setData({
-      post: res.result.data
+      post: res.result.data,
     })
     this.calcPastTimeText()
   },
@@ -99,18 +98,21 @@ Page({
   },
 
   async collectPost() {
-    wx.showLoading({
-      title: '请求中...',
-    })
     const res = await requestCloud('setCollectitonById', {postId: this.data.post._id}, app)
     wx.hideLoading()
     if (res.result.data.ok) {
       this.setData({
         post: { ...this.data.post, isCollected: !this.data.post.isCollected }
       })
-      wx.showToast({
-        title: '成功加入收藏'
-      })
+      if (this.data.post.isCollected) {
+        wx.showToast({
+          title: '已收藏'
+        })
+      } else {
+        wx.showToast({
+          title: '已取消收藏'
+        })
+      }
     } else {
       wx.showToast({
         title: '失败'
@@ -122,18 +124,20 @@ Page({
     // 点赞用户的点赞列表+1
     // 后端查询点赞列表，isLike字段
     // 文章的点赞数+1
-    wx.showLoading({
-      title: '请求中...',
-    })
     const res = await requestCloud('setLikeById', { postId: this.data.post._id }, app)
-    wx.hideLoading()
     if (res.result.data.ok) {
       this.setData({
         post: { ...this.data.post, isLiked: !this.data.post.isLiked }
       })
-      wx.showToast({
-        title: '谢谢支持'
-      })
+      if (this.data.post.isLiked) {
+        wx.showToast({
+          title: '谢谢支持'
+        })
+      } else {
+        wx.showToast({
+          title: '亲，别这样'
+        })
+      }
     } else {
       wx.showToast({
         title: 'oops点赞失败'
@@ -144,6 +148,12 @@ Page({
   calcPastTimeText() {
     this.setData({
       pastTimeText: format(this.data.post.createdAt, 'zh_CN')
+    })
+  },
+
+  showStatement(source) {
+    this.setData({
+      show: true
     })
   }
 })

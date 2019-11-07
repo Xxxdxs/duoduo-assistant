@@ -1,0 +1,11 @@
+<!--components/buff-pannel/buff-pannel.wxml-->
+
+<view class="buff-pannel-wrap">
+  <view class="buff-item" wx:for="{{jibansComputed}}" wx:for-item="jiban" wx:key="{{jiban.name}}">
+    <image src="{{jiban.icon}}" class="buff-img" mode="widthFix"></image>
+    <view class="buff-level">
+      <view wx:for="{{jiban.length}}"  wx:key="{{index}}" class="buff-level-bg {{index < jiban.list.length ? 'buff-level-active' : ''}}"></view>
+    </view>
+  </view>
+</view>
+

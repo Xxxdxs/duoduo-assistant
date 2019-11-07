@@ -9,16 +9,22 @@
   box-sizing: border-box;
 }  */
 
+/* https://static.dragonest.com/longyuan-nuxt-website-zzq/production/nuxt/img/m_bgImg.c8e1594.png */
+
 page {
-  color: #d2d2d2;
-  background: #161f2b;
+  color: #FFEFD4;
+  /* background: #161f2b; */
+  /* background: url(//static.dragonest.com/longyuan-nuxt-website-zzq/production/nuxt/img/m_bgImg.c8e1594.png) no-repeat 50% 30%; */
+  /* background-size: 100% 100000%; */
+  background: #2A1A18;
   font-size: 14px;
 }
 
 .navbar {
   /* background: rgb(250, 250, 250); */
-  background: #141D28;
-  color: #5896d5;
+  /* background: #141D28;
+  color: #5896d5; */
+  background: #2A1A18;
 }
 
 view {

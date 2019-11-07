@@ -13,3 +13,7 @@
 
 ## 我自己
 //tva1.sinaimg.cn/crop.0.0.180.180.180/719a5e44jw1e8qgp5bmzyj2050050aa8.jpg
+
+    "color": "#7d7e80",
+    "selectedColor": "#5797D5",
+    "backgroundColor": "#1c2a38",

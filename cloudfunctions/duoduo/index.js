@@ -9,7 +9,9 @@ const PROD_BASE_URL = 'http://xlxlx.xyz:3000/client/api'
 const BASE_URL = isDev ? DEV_BASE_URL : PROD_BASE_URL
 // cloud-dev-0f318b cloud-prod-yg88k
 cloud.init({
+  // env: 'cloud-prod-yg88k'
   env: process.env.cloudName
+  // env: 'cloud-prod-yg88k'
 })
 
 const db = cloud.database()
@@ -17,6 +19,10 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   try {
+    if (event.name === 'tools') {
+      // 把工具页面函数整合起来， 节约资源
+    }
+
     if (event.name === 'races') {
       const data = await db.collection('races').where({}).get()
 
@@ -24,16 +30,16 @@ exports.main = async (event, context) => {
         const { name, ethnicPattern, ethnicIcon, skills } = el
         return { name, ethnicPattern, ethnicIcon, skills }
       })
+      // 保留errormessage
       return { ...data, data: ret }
     }
 
     if (event.name === 'heroes') {
       const data = await db.collection('heroes').where({}).get()
       const ret = data.data.map(el => {
-        const { name, miniIcon, icon, cardQuality, category, cardType } = el
-        return { name, miniIcon, icon, cardQuality, category, cardType }
+        const { name, miniIcon, icon, cardQuality, category, cardType, heroId, _id } = el
+        return { name, miniIcon, icon, cardQuality, category, cardType, heroId, _id }
       })
-
       return { ...data, data: ret }
     }
 
@@ -48,7 +54,7 @@ exports.main = async (event, context) => {
     }
 
     if (event.name === 'getHeroById') {
-      const data = await db.collection('heroes').doc(event._id).get()
+      const data = await db.collection('heroes').doc(event.id).get()
       return data
     }
 
@@ -92,7 +98,7 @@ exports.main = async (event, context) => {
 
     if (event.name === 'getCollectionList') {
       const { userId } = event
-      const res = await axios.post(BASE_URL + `/collection/list}`, {
+      const res = await axios.post(BASE_URL + `/collection/list`, {
         userId
       })
       return { data: res.data }
@@ -112,6 +118,49 @@ exports.main = async (event, context) => {
         userId: res.data.userId,
         success: res.data.success
       }
+    }
+
+    if (event.name === 'teams') {
+      const data = await db.collection('teams').where({}).get()
+      const teams = data.data
+      for(const [index1, value] of teams.entries()) {
+        let { teamList } = value
+        for (const [index2, team] of teamList.entries()) {
+          const idObjList = team.chessList.map(el => ({ _id: el }))
+          const res = await db.collection('heroes')
+              .where(db.command.or(idObjList))
+              .field({
+                name: true,
+                _id: true,
+                miniIcon: true,
+                category: true,
+                cardType: true,
+                heroId: true
+              })
+              .get()
+          teams[index1].teamList[index2].chessList = res.data
+        }
+      }
+      return data
+    }
+
+    if (event.name === 'notice') {
+      // 顶部通知
+      const res = await db.collection('notices').where({}).get()
+      const notice = res.data[0]
+      return {data: notice}
+    }
+
+    if (event.name === 'test') {
+      // const res = await db.collection('heroes').get()
+      // const heroes = res.data
+      // for(let i = 0; i < heroes.length; i++) {
+      //   await db.collection('heroes').doc(heroes[i]._id).update({
+      //     data: {
+      //       heroId: heroes[i].heroId.substring(1)
+      //     }
+      //   })
+      // }
     }
 
   } catch (e) {

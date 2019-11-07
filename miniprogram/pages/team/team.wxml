@@ -1,0 +1,105 @@
+<cu-custom bgColor="navbar" isCustom="{{true}}">
+  <view slot="content">推荐阵容</view>
+</cu-custom>
+<view class="container">
+  <view class="loading-container" wx:if="{{!teamsList.length}}">
+    <van-loading class="text-primary"/>
+  </view>
+  <view class="breadcrumb d-flex ai-center">
+    <view class="breadcrumb-item {{breadcrumb.length ===  index + 1 ? 'breadcrumb-item-active' : ''}}" wx:for="{{breadcrumb}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="clickBread">
+      <text class="breadcrumb-item-text">{{item.name}}</text>
+    </view>
+  </view>
+  <view class="content px-2">
+    <view class="teams d-flex ai-center jc-between flex-wrap" hidden="{{breadcrumbIndex !== 0}}">
+      <view wx:for="{{teamsList}}" class="teams-item mt-2" hover-class="hover" wx:key="{{item._id}}" data-index="{{index}}" bind:tap="clickTeams">
+        <image src="{{item.pic}}" mode="widthFix" style="width: 340rpx;position: relative;">
+          <!-- 顶部35px -->
+          <image src="{{item.icon}}" class="teams-icon"></image>
+          <text class="teams-name text-white">{{item.name}}</text>
+        </image>
+      </view>
+    </view>
+    <view class="team-list d-flex flex-column ai-center flex-wrap" hidden="{{breadcrumbIndex !== 1}}">
+      <view wx:for="{{teams.teamList}}" wx:key="{{index}}" wx:for-item="item" class="team"  hover-class="hover" data-index="{{index}}" bind:tap="clickTeam">
+        <view class="team-title d-flex jc-between ai-center">
+          <view class="title-left">
+            {{item.name}}
+          </view>
+          <view class="title-right d-flex ai-center ">
+            <view>上手难度 </view>
+            <van-rate
+              value="{{ item.difficulty }}"
+              icon-class="icon-star"
+              readonly
+              allow-half="{{true}}"
+              void-icon="star-o"
+            />
+          </view>
+        </view>
+        <view class="team-content d-flex ai-center">
+          <view class="team-content-left d-flex ai-center">
+            <!-- <text wx:for="{{item.chessList}}" wx:key="{{index}}" wx:for-item="team">
+              {{team.name}}
+            </text> -->
+            <view wx:for="{{tenCountArr}}" wx:key="{{index}}" wx:for-item="chessCell" style="width:40rpx;height:40rpx;background:#252525;margin-left:2rpx;">
+              <image wx:if="{{item.chessList[index]}}" src="{{iconBaseUrl + item.chessList[index].heroId + '.png'}}" style="width:40rpx;height:40rpx;"></image>
+            </view>
+          </view>
+          <view class="team-content-right">
+            <buff-pannel race-list="{{raceList}}" career-list="{{careerList}}" hero-list="{{item.chessList}}" ></buff-pannel>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="team-detail d-flex flex-column ai-center jc-around flex-wrap" hidden="{{breadcrumbIndex !== 2}}">
+      <view class="detail-title">{{team.name}}</view>
+      <view class="detail-content d-flex ai-center" style="width:100%;">
+        <view class="detail-content-left flex-none" style="width: 120rpx">主要棋子</view>
+        <view class="detail-content-right d-flex ai-center">
+          <view wx:for="{{tenCountArr}}" wx:key="{{index}}" style="width:50rpx;height:50rpx;background:#252525;margin-left:4rpx;">
+            <image wx:if="{{team.chessList[index]}}" src="{{iconBaseUrl + team.chessList[index].heroId + '.png'}}" style="width:50rpx;height:50rpx;" data-id="{{team.chessList[index]._id}}"  bind:tap="jumpHeroPage"></image>
+          </view>
+        </view>
+      </view>
+      <view class="detail-content d-flex ai-center">
+        <view class="detail-content-left flex-none" style="width: 120rpx">对应效果</view>
+        <view class="detail-content-right">
+          <buff-pannel race-list="{{raceList}}" career-list="{{careerList}}" hero-list="{{team.chessList}}" ></buff-pannel>
+        </view>
+      </view>
+      <view class="detail-content d-flex ai-center">
+        <view class="detail-content-left flex-none" style="width: 120rpx">阵容优势</view>
+        <view class="detail-content-right d-flex ai-center">
+          <view class="detail-goodness" wx:for="{{team.goodness}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+      </view>
+      <view class="detail-content d-flex ai-center">
+        <view class="detail-content-left flex-none" style="width: 120rpx">阵容劣势</view>
+        <view class="detail-content-right d-flex ai-center">
+          <view class="detail-weakness" wx:for="{{team.weakness}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+      </view>
+      <view class="detail-content d-flex ai-center">
+        <view class="detail-content-left flex-none" style="width: 120rpx">备选棋子</view>
+        <view class="detail-content-right">
+
+        </view>
+      </view>
+      <view class="detail-content d-flex ai-center">
+        <view class="detail-content-left flex-none" style="width: 120rpx">升三星推荐</view>
+        <view class="detail-content-right d-flex ai-center">
+          <view class="detail-cores" wx:for="{{team.cores}}" wx:key="{{index}}" style="width:50rpx;height:50rpx;background:#252525;margin-left:4rpx;">
+            <image src="{{iconBaseUrl + team.chessList[index].heroId + '.png'}}" style="width:50rpx;height:50rpx;" data-id="{{team.chessList[index]._id}}"  bind:tap="jumpHeroPage"></image>
+          </view>
+        </view>
+      </view>
+      <view class="detail-content d-flex ai-center">
+        <view class="detail-content-left flex-none" style="width: 120rpx">运营思路</view>
+        <view class="detail-content-right">
+          <text class="detail-suggestion">{{team.suggestion}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

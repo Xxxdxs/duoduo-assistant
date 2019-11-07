@@ -2,14 +2,14 @@
 <cu-custom bgColor="navbar" isCustom>
   <view slot="content">{{post.author}}</view>
 </cu-custom>
-<view class="container p-2 pb-5">
+<view class="container p-2 pb-5 text-normal">
   <view class="loading-container" wx:if="{{!post.title}}">
-    <van-loading color="#5896d5"/>
+    <van-loading class="text-primary"/>
   </view>
   <block wx:if="{{post.title}}">
     <view class="header" style="margin: 0 -12rpx;">
       <image mode="scaleToFill" src="{{post.thumbnail}}" style="width: 750rpx;height: 420rpx;"></image>
-      <view class="title fs-xl px-3 py-2 text-white">{{post.title}}</view>
+      <view class="title fs-xl px-3 py-2 text-primary">{{post.title}}</view>
     </view>
     <view class="content">
       <view class="content-header d-flex ai-center" style="height: 120rpx">
@@ -17,29 +17,48 @@
           <image model="scaleToFill" style="width: 100rpx;height: 100rpx;border-radius: 50%;" src="{{post.avatar || source.avatar}}"></image>
         </view>
         <view class="post-desc flex-grow-1 ml-2 fs-sm">
-          <view class="post-author">{{post.author}}</view>
-          <view class="post-source">
-            <text>{{source.name}}</text>
+          <view class="post-author">
+            <text>{{post.author}}</text>
             <text>{{" | "}}</text>
             <text>{{pastTimeText}}</text>
           </view>
+          <view class="post-source">
+            <text>本文来源： </text>
+            <text class="text-primary" bind:tap="showStatement">{{source.name}}</text>
+          </view>
         </view>
         <view class="post-collect mr-2" bind:tap="collectPost">
-          <text class="{{post.isCollected ? 'cuIcon-favorfill': 'cuIcon-favor'}}" style="font-size: 32px; {{post.isCollected ? 'color: #5896d5;' : ''}}"></text>
+          <text class="{{post.isCollected ? 'cuIcon-favorfill': 'cuIcon-favor'}}" style="font-size: 32px; {{post.isCollected ? 'color: #FFEFD4;' : ''}}"></text>
         </view>
       </view>
       <wxparse data="{{post.body}}" type="html"></wxparse>
     </view>
-    <view class="footer d-flex">
+    <view class="footer d-flex text-primary mt-3">
       <view class="read-count">
         <text class="cuIcon-attention"></text>
         <text>{{" " + post.readCount}} </text> 
       </view>
       <view class="flex-grow-1"></view>
       <view class="like" bind:tap="onTapLike">
-        <text class="{{isLike ? 'cuIcon-appreciatefill': 'cuIcon-appreciate'}}" style="{{isLike ? 'color: #5896d5;' : ''}}"></text>
-        <text>{{isLike ? '谢谢你': '点个赞'}}</text>
+        <text class="{{post.isLiked ? 'cuIcon-appreciatefill': 'cuIcon-appreciate'}}" style="{{post.isLiked ? 'color: #FFEFD4;' : ''}}"></text>
+        <text>{{post.likeCount}}</text>
       </view>
     </view>  
   </block>
 </view>
+<van-dialog
+  use-slot
+  overlay
+  show="{{ show }}"
+  show-confirm-button="{{false}}"
+  close-on-click-overlay
+>
+  <view class="statement d-flex flex-column ai-center text-primary fs-sm bg-primary1 p-3">
+    <view class="text-center">本文来源</view>
+    <image src="{{source.avatar}}" style="width: 100rpx;height: 100rpx;border-radius: 50%;"></image>
+    <view class="text-center fs-large">{{source.name}}</view>
+    <view>{{ source.homepage}}</view>
+    <view>{{ source.slogan}}</view>
+    <view>{{ source.description}}</view>
+  </view>
+</van-dialog>

@@ -15,12 +15,12 @@
 
 .wxParse-inline {
   background: none !important;
-  color: #fff;
+  color: #AD9D8F;
 }
 
 span {
   background: none !important;
-  color: #fff;
+  color: #AD9D8F;
 }
 
 img {

@@ -1,15 +1,17 @@
 //app.js
+const { requestCloud } = require('./utils/tools.js');
+
 App({
   globalData: {
   },
-  onLaunch: function () {
+  onLaunch: async function () {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
       wx.cloud.init({
         // cloud-prod-yg88k cloud-dev-0f318b
         // 此处请填入环境 ID, 环境 ID 可打开云控制台查看
-        env: 'cloud-dev-0f318b',
+        env: 'cloud-prod-yg88k',
         traceUser: true,
       })
     }
@@ -23,6 +25,8 @@ App({
         this.globalData.ScrollViewHeight = e.windowHeight - this.globalData.CustomBar - 34
       }
     })
+
+    await Promise.all([this.getCareerList(), this.getRaceList()])
   },
   get(url) {
     return new Promise((resolve, reject) => {
@@ -82,5 +86,15 @@ App({
 
       return userId
     }
+  },
+
+  async getCareerList() {
+    const res = await requestCloud('careers')
+    this.globalData.careerList = res.result.data
+  },
+
+  async getRaceList() {
+    const res = await requestCloud('races')
+    this.globalData.raceList = res.result.data
   }
 })

@@ -44,7 +44,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -63,7 +63,28 @@
 					"id": 2,
 					"name": "pages/post/post",
 					"pathName": "pages/post/post",
-					"query": "id=5d276011f1a37bba1749b589",
+					"query": "id=5d3514a0bebd49b2fe04aece",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/collection/collection",
+					"pathName": "pages/collection/collection",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "team页面",
+					"pathName": "pages/team/team",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "hero页面",
+					"pathName": "pages/hero/hero",
+					"query": "id=aWZX6s9wg2YGsW2J5tG53H12mFTM0I4lshkc02fi4OTc9VXo",
 					"scene": null
 				}
 			]

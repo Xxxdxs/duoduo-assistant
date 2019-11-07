@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "buff-pannel": "../../components/buff-pannel/buff-pannel"
+  }
+}

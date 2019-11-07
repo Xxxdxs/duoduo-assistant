@@ -1,8 +1,20 @@
 .text-primary {
-  color: #5797d5;
+  color: #ffefd4;
 }
 .bg-primary {
-  background-color: #5797d5;
+  background-color: #ffefd4;
+}
+.text-primary1 {
+  color: #938373;
+}
+.bg-primary1 {
+  background-color: #938373;
+}
+.text-normal {
+  color: #ad9d85;
+}
+.bg-normal {
+  background-color: #ad9d85;
 }
 .text-white {
   color: #fff;
@@ -21,6 +33,24 @@
 }
 .bg-light {
   background-color: #f9f9f9;
+}
+.text-gold1 {
+  color: #b39b54;
+}
+.bg-gold1 {
+  background-color: #b39b54;
+}
+.text-gold2 {
+  color: #b49c55;
+}
+.bg-gold2 {
+  background-color: #b49c55;
+}
+.text-gold3 {
+  color: #b39b54;
+}
+.bg-gold3 {
+  background-color: #b39b54;
 }
 .text-grey1 {
   color: #d4e2f4;
@@ -466,11 +496,9 @@
 .flex-grow-1 {
   flex-grow: 1;
 }
-
-.flex-none {
-  flex: none;
-}
-
 .flex-wrap {
   flex-wrap: wrap;
+}
+.flex-none {
+  flex: none;
 }

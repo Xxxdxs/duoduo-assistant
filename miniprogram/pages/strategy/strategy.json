@@ -1,7 +1,4 @@
 {
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom",
-    "van-tab": "/lib/tab/index",
-    "van-tabs": "/lib/tabs/index"
   }
 }

@@ -3,12 +3,12 @@
 </cu-custom>
 <view class="container">
   <view class="loading-container" wx:if="{{!recommendPosts.length}}">
-    <van-loading color="#5896d5"/>
+    <van-loading class="text-primary"/>
   </view>
   <van-tabs animated swipeable line-width="0">
   <van-tab title="推荐">
     <scroll-view scroll-y class="scroll-content px-2" style="height: {{scrollViewHeight}}px">
-      <view wx:for="{{recommendPosts}}" wx:key="_id" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
+      <view wx:for="{{recommendPosts}}" wx:key="{{item._id}}" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
         <view class="post-content d-flex flex-column flex-grow-1 p-2">
           <view class="post-title flex-grow-1">
               {{item.title}}
@@ -30,7 +30,7 @@
     </van-tab>
     <van-tab title="新手">
       <scroll-view scroll-y class="scroll-content px-2" style="height: {{scrollViewHeight}}px">
-        <view wx:for="{{beginnerPosts}}" wx:key="_id" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
+        <view wx:for="{{beginnerPosts}}" wx:key="{{item._id}}" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
           <view class="post-content d-flex flex-column flex-grow-1 p-2">
             <view class="post-title flex-grow-1">
               {{item.title}}
@@ -52,7 +52,7 @@
     </van-tab>
     <van-tab title="进阶">
       <scroll-view scroll-y class="scroll-content px-2" style="height: {{scrollViewHeight}}px">
-        <view wx:for="{{advancedPosts}}" wx:key="_id" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
+        <view wx:for="{{advancedPosts}}" wx:key="{{item._id}}" class="post-item d-flex p-1" hover-class="post-item-clicked" data-postid="{{item._id}}" bind:tap="jumpPage">
           <view class="post-content d-flex flex-column flex-grow-1 p-2">
             <view class="post-title flex-grow-1">
               {{item.title}}

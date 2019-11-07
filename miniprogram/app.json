@@ -3,7 +3,10 @@
     "pages/tools/tools",
     "pages/user/user",
     "pages/strategy/strategy",
-    "pages/post/post"
+    "pages/post/post",
+    "pages/collection/collection",
+    "pages/team/team",
+    "pages/hero/hero"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -19,22 +22,31 @@
     "downloadFile": 10000
   },
   "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom",
     "van-tab": "/lib/tab/index",
     "van-tabs": "/lib/tabs/index",
     "van-dialog": "/lib/dialog/index",
     "van-loading": "/lib/loading/index",
-    "van-icon": "/lib/icon/index"
+    "van-icon": "/lib/icon/index",
+    "van-rate": "/lib/rate/index",
+    "van-notice-bar": "/lib/notice-bar/index"
   },
   "tabBar": {
     "color": "#7d7e80",
-    "selectedColor": "#5797D5",
-    "backgroundColor": "#1c2a38",
+    "selectedColor": "#FFEFD4",
+    "backgroundColor": "#2A1A18",
     "list": [
       {
         "pagePath": "pages/tools/tools",
         "iconPath": "common/img/tools.png",
         "selectedIconPath": "common/img/tools-active.png",
         "text": "工具"
+      },
+      {
+        "pagePath": "pages/team/team",
+        "iconPath": "common/img/team.png",
+        "selectedIconPath": "common/img/team-active.png",
+        "text": "阵容"
       },
       {
         "pagePath": "pages/strategy/strategy",

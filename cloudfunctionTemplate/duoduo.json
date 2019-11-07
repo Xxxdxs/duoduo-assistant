@@ -20,5 +20,11 @@
     "value": {
       "name": "heroes"
     }
+  },
+  {
+    "name": "普通",
+    "value": {
+      "name": "teams"
+    }
   }
 ]

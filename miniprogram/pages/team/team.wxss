@@ -1,0 +1,150 @@
+/* miniprogram/pages/team/team.wxss */
+.loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.breadcrumb {
+  font-size: 32rpx;
+  height: 60rpx;
+  padding: 0 24rpx;
+  color: #fff;
+}
+
+.breadcrumb-item {
+  position: relative;
+  margin-left: 10rpx;
+  width: 180rpx;
+  height: 48rpx;
+  text-align: center;
+  overflow: visible;
+}
+
+.breadcrumb-item-text {
+  /* 没有z-index的话会被伪元素覆盖。 */
+  /* 注意： 要相对布局才能生效 */
+  position: relative;
+  line-height: 48rpx;
+  vertical-align: middle;
+  z-index: 10;
+}
+
+.breadcrumb-item::before, .breadcrumb-item::after{
+  content: '';
+  display: block;
+  position: absolute;
+  left:0;
+  right:0;
+  height: 24rpx;
+  border: 1rpx solid #484231;
+}
+
+.breadcrumb-item-active::before, .breadcrumb-item-active::after{
+  background: #b39b54;
+}
+
+.breadcrumb-item::before {
+  top:0;
+  transform: skew(45deg);
+  border-bottom: none;
+}
+
+.breadcrumb-item::after {
+  bottom: 0;
+  transform: skew(-45deg);
+  border-top: none;
+}
+
+
+.teams-item {
+  width: 50%;
+  text-align: center;
+  transition: all 0.1s;
+}
+
+.hover {
+  transform: scale(0.9);
+}
+
+.teams-icon {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.teams-name {
+  position: absolute;
+  top:-2rpx;
+  left:60rpx;
+  font-size: 22rpx;
+  font-weight: bold;
+}
+
+.team {
+  width: 100%;
+}
+
+.team-title {
+  height: 60rpx;
+  font-size: 32rpx;
+  vertical-align: middle;
+  line-height: 60rpx;
+}
+
+.icon-star {
+  /* 不能设置font-size，会导致半星失效 */
+  /* vertical-align: middle !important;
+  line-height: 50rpx !important; */
+  position: relative;
+}
+
+.team-detail {
+  font-size: 24rpx;
+  text-align: left;
+}
+
+.detail-title {
+  width: 100%;
+}
+
+.detail-content {
+  width: 100%;
+  margin-top: 4rpx;
+  min-height: 70rpx;
+}
+
+.detail-content-left {
+  flex-basis: 160rpx;
+  text-align: center;
+}
+
+.detail-goodness {
+  margin-left: 6rpx;
+  min-width: 120rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  font-size: 20rpx;
+  vertical-align: middle;
+  text-align: center;
+  background: #5a8143;
+}
+
+.detail-weakness {
+  margin-left: 6rpx;
+  min-width: 120rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  font-size: 20rpx;
+  vertical-align: middle;
+  text-align: center;
+  background: #41647b;
+}
+
+.detail-suggestion {
+  font-size: 20rpx;
+}
+

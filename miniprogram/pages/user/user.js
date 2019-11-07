@@ -99,5 +99,11 @@ Page({
       title: '功能未完成',
       icon: 'none'
     })
+  },
+
+  jumpToCollection() {
+    wx.navigateTo({
+      url: '/pages/collection/collection'
+    })
   }
 })

@@ -1,0 +1,35 @@
+/* miniprogram/pages/hero/hero.wxss */
+
+.content-prop {
+  text-align: center;
+}
+
+.content-voice {
+  text-align: center;
+}
+
+.content-title {
+  margin-bottom: 8rpx;
+}
+
+.prop-item {
+  min-height: 60rpx;
+  align-items: center;
+}
+
+.prop-name {
+  flex: 0 0 160rpx;
+}
+
+.prop-desc {
+  flex: 1;
+}
+
+.prop-desc-item {
+  /* flex-grow:1；并不等分，而是将去掉内容的宽度进行等比划分，如果需要等分还要设置flex-basis; */
+  flex: 1;
+}
+
+.content-prop .prop-item:nth-child(2n) {
+  background: #563930;
+}
