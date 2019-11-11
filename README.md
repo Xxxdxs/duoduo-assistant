@@ -2,9 +2,10 @@
 小程序多多岛小助手, 多多自走棋阵容生成器, 用了一下云开发, 暂时只有生成图片分享功能. 第一次写小程序, 多多指教
 
 ## 技术栈
-小程序 + 云开发 + moongoose + vue elementUI + gitlab CI/CD
+小程序 + 云开发 + express + mongodb + vue elementUI + gitlab CI/CD
 
 ## 后端和CMS地址
+暂时不开放, 含有密码信息
 [后端代码仓库](https://gitlab.com/TheLostXianXian/duoduo-server-node)
 [CMS代码仓库](https://gitlab.com/TheLostXianXian/duoduo-server-admin)
 不太会写, 勿喷.
